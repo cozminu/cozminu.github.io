@@ -1,0 +1,11 @@
+.ProfilePic {
+  margin: 60px;
+  text-align: center;
+}
+
+.ProfilePic img {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 50vw;
+  height: auto;
+}

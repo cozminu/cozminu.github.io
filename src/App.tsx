@@ -1,13 +1,15 @@
 import "./App.css";
 import ArticleTitle from "./components/ArticleTitle";
+import ProfilePic from "./components/ProfilePic";
 
 function App() {
-  const title = "Cozmin Ungureanu";
   return (
     <div className="App">
-      <header className="App-header">
-        <ArticleTitle title={title}>Full Stack Web Developer</ArticleTitle>
-      </header>
+      <ProfilePic></ProfilePic>
+      <div>
+        <h1>Cozmin Ungureanu</h1>
+        <h2>Full Stack Web Developer</h2>
+      </div>
     </div>
   );
 }
