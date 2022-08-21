@@ -7,8 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - name: Build & Deploy React app to GitHub Pages
-      uses: MrKrishnaAgarwal/deploy-react-app-to-gh-pages@v1.0.0
+      uses: tanwanimohit/deploy-react-to-ghpages@v1.0.1
