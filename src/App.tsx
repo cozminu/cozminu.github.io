@@ -1,5 +1,4 @@
 import "./App.css";
-import ArticleTitle from "./components/ArticleTitle";
 import ProfilePic from "./components/ProfilePic";
 
 function App() {
