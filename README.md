@@ -1,3 +1,3 @@
 # Personal GitHub Page
 
-[https://cozmin.com/](https://cozmin.com/)
+[https://cozminu.com/](https://cozminu.com/)
