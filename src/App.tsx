@@ -1,14 +1,13 @@
 import "./App.css";
 import ProfilePic from "./components/ProfilePic";
+import ProfileTitle from "./components/ProfileTitle";
+
 
 function App() {
   return (
     <div className="App">
       <ProfilePic></ProfilePic>
-      <div>
-        <h1>Cozmin Ungureanu</h1>
-        <h2>Full Stack Web Developer</h2>
-      </div>
+      <ProfileTitle></ProfileTitle>
     </div>
   );
 }
