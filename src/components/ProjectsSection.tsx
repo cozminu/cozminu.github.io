@@ -41,7 +41,7 @@ export default function ProjectsSection({
 }) {
   return (
     <Section
-      id="projects"
+      id="featured-projects"
       title="Featured Projects"
       isFlashing={isFlashing}
       className="rounded-2xl p-6 md:p-8 border bg-white/30 dark:bg-zinc-900/40 backdrop-blur-xl shadow-xl border-white/30 dark:border-zinc-800/40"
