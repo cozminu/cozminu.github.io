@@ -8,8 +8,10 @@ import LanguagesSection from "./components/LanguagesSection";
 import CertificationsSection from "./components/CertificationsSection";
 import FloatingContactButton from "./components/FloatingContactButton";
 import ProjectsSection from "./components/ProjectsSection";
+import Chip from "./components/Chip";
+import QuickLinks from "./components/QuickLinks";
 import React from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 const ThemeContext = React.createContext<{
   theme: string;
@@ -28,8 +30,8 @@ function Section(props: {
   return (
     <section
       id={props.id}
-      className={`rounded-2xl p-6 md:p-8 border transition-all duration-700
-        bg-white/30 dark:bg-zinc-900/40 backdrop-blur-xl shadow-xl border border-white/30 dark:border-zinc-800/40
+      className={`rounded-2xl p-6 md:p-8 transition-all duration-700
+        bg-white/30 dark:bg-zinc-900/40 backdrop-blur-xl shadow-xl border-white/30 dark:border-zinc-800/40
         ${
           props.isFlashing
             ? "animate-pulse bg-blue-100/80 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700 shadow-lg shadow-blue-200/50 dark:shadow-blue-900/30"
@@ -122,24 +124,7 @@ function ThemeToggle() {
   );
 }
 
-function Chip(props: { children: any }) {
-  return (
-    <span
-      className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium border transition-colors duration-300 hover:shadow hover:bg-indigo-100 dark:hover:bg-indigo-900"
-      style={{
-        background: "var(--color-chip-light)",
-        color: "var(--color-text-light)",
-        borderColor: "var(--color-border-light)",
-      }}
-      data-dark={
-        typeof window !== "undefined" &&
-        document.documentElement.classList.contains("dark")
-      }
-    >
-      {props.children}
-    </span>
-  );
-}
+// ...Chip is now imported from components/Chip
 
 function App() {
   const [theme] = useTheme();
@@ -345,86 +330,7 @@ function App() {
 
           <aside className="relative lg:sticky lg:top-8 space-y-4 sm:space-y-6 md:space-y-8 h-fit">
             <Section id="quick-links" title="Quick Links">
-              <div className="flex flex-wrap justify-center sm:justify-start gap-2">
-                <motion.button
-                  whileHover={{
-                    scale: 1.08,
-                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
-                  }}
-                  whileTap={{ scale: 0.96 }}
-                  className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
-                  onClick={() => handleQuickLinkClick("summary")}
-                  aria-label="Jump to Summary section"
-                  tabIndex={0}
-                >
-                  Summary
-                </motion.button>
-                <motion.button
-                  whileHover={{
-                    scale: 1.08,
-                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
-                  }}
-                  whileTap={{ scale: 0.96 }}
-                  className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
-                  onClick={() => handleQuickLinkClick("projects")}
-                  aria-label="Jump to Featured Projects section"
-                  tabIndex={0}
-                >
-                  Featured Projects
-                </motion.button>
-                <motion.button
-                  whileHover={{
-                    scale: 1.08,
-                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
-                  }}
-                  whileTap={{ scale: 0.96 }}
-                  className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
-                  onClick={() => handleQuickLinkClick("experience")}
-                  aria-label="Jump to Experience section"
-                  tabIndex={0}
-                >
-                  Experience
-                </motion.button>
-                <motion.button
-                  whileHover={{
-                    scale: 1.08,
-                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
-                  }}
-                  whileTap={{ scale: 0.96 }}
-                  className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
-                  onClick={() => handleQuickLinkClick("skills")}
-                  aria-label="Jump to Skills section"
-                  tabIndex={0}
-                >
-                  Skills
-                </motion.button>
-                <motion.button
-                  whileHover={{
-                    scale: 1.08,
-                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
-                  }}
-                  whileTap={{ scale: 0.96 }}
-                  className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
-                  onClick={() => handleQuickLinkClick("languages")}
-                  aria-label="Jump to Languages section"
-                  tabIndex={0}
-                >
-                  Languages
-                </motion.button>
-                <motion.button
-                  whileHover={{
-                    scale: 1.08,
-                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
-                  }}
-                  whileTap={{ scale: 0.96 }}
-                  className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
-                  onClick={() => handleQuickLinkClick("certifications")}
-                  aria-label="Jump to Certifications section"
-                  tabIndex={0}
-                >
-                  Certifications
-                </motion.button>
-              </div>
+              <QuickLinks handleQuickLinkClick={handleQuickLinkClick} />
             </Section>
 
             <SkillsSection
