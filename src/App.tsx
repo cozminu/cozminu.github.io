@@ -1,5 +1,11 @@
 import ProfilePic from "./components/ProfilePic";
 import ProfileTitle from "./components/ProfileTitle";
+import SummarySection from "./components/SummarySection";
+import ExperienceSection from "./components/ExperienceSection";
+import SkillsSection from "./components/SkillsSection";
+import LanguagesSection from "./components/LanguagesSection";
+import CertificationsSection from "./components/CertificationsSection";
+import EducationSection from "./components/EducationSection";
 import React from "react";
 
 const ThemeContext = React.createContext<{
@@ -258,7 +264,11 @@ function App() {
           />
         </svg>
       </div>
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-4 sm:py-8 md:py-12">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-4 sm:py-8 md:py-12 relative">
+        {/* Always show theme toggle at top left */}
+        <div className="fixed top-3 right-3 z-50">
+          <ThemeToggle />
+        </div>
         <header className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-0">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <div className="flex justify-center sm:justify-start">
@@ -304,136 +314,18 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="flex justify-center sm:justify-end">
-            <ThemeToggle />
-          </div>
         </header>
 
         <main className="mt-6 sm:mt-10 md:mt-14 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           <div className="lg:col-span-2 space-y-4 sm:space-y-6 md:space-y-8">
-            <Section
-              id="summary"
-              title="Summary"
+            <SummarySection
+              Section={Section}
               isFlashing={flashingSection === "summary"}
-            >
-              <p>
-                Senior Software Developer with 10+ years of experience in
-                building scalable, high-performance applications across
-                telecommunications, energy, and pharma industries. Proficient in
-                TypeScript, NestJS, Node.js, PHP, and cloud services like Azure.
-                Skilled in backend development, system integrations, and
-                AI-powered solutions. Adept at quickly learning new technologies
-                and collaborating with cross-functional teams in remote
-                environments.
-              </p>
-            </Section>
-
-            <Section
-              id="experience"
-              title="Experience"
+            />
+            <ExperienceSection
+              Section={Section}
               isFlashing={flashingSection === "experience"}
-            >
-              <div className="space-y-6">
-                <article>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1">
-                    <h3 className="text-lg md:text-xl font-medium text-zinc-900 dark:text-zinc-100">
-                      BreakPoint IT — Back-end Developer
-                    </h3>
-                    <p className="text-zinc-600 dark:text-zinc-400">
-                      January 2025 - Present · Remote
-                    </p>
-                  </div>
-                </article>
-                <article>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1">
-                    <h3 className="text-lg md:text-xl font-medium text-zinc-900 dark:text-zinc-100">
-                      Cognizant — Senior Software Engineer
-                    </h3>
-                    <p className="text-zinc-600 dark:text-zinc-400">
-                      July 2023 - January 2025 · Remote
-                    </p>
-                  </div>
-                  <ul className="mt-3 list-disc list-inside space-y-2 text-zinc-700 dark:text-zinc-300">
-                    <li>
-                      Designed and implemented key integrations for an
-                      AI-powered digital assistant, including custom APIs
-                      bridging legacy systems (.NET Core, C#, NestJS).
-                    </li>
-                    <li>
-                      Built a NestJS chat API as a wrapper for ChatGPT for
-                      dynamic responses across enterprise systems.
-                    </li>
-                    <li>
-                      Optimized large-data handling via concurrent calls, Azure
-                      Blob CSV uploads, and streaming (200K+ items).
-                    </li>
-                    <li>
-                      Orchestrated NestJS cron workloads on Kubernetes for
-                      ServiceNow, Sailpoint, and Workday syncs.
-                    </li>
-                    <li>
-                      Remediated WAST vulnerabilities to meet pharma-grade data
-                      security requirements.
-                    </li>
-                  </ul>
-                </article>
-                <article>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1">
-                    <h3 className="text-lg md:text-xl font-medium text-zinc-900 dark:text-zinc-100">
-                      Cognizant Softvision — Senior Software Engineer
-                    </h3>
-                    <p className="text-zinc-600 dark:text-zinc-400">
-                      October 2022 - July 2023 · Remote
-                    </p>
-                  </div>
-                  <ul className="mt-3 list-disc list-inside space-y-2 text-zinc-700 dark:text-zinc-300">
-                    <li>
-                      Developed a REST API with NestJS and PostgreSQL serving
-                      customer, broker, and supplier apps.
-                    </li>
-                    <li>
-                      Partnered with frontend, QA, and product for seamless
-                      integration and UX.
-                    </li>
-                    <li>
-                      Integrated Redis and third‑party providers; identified
-                      scalability bottlenecks early.
-                    </li>
-                    <li>
-                      Upskilled rapidly in TypeScript, NestJS, and PostgreSQL.
-                    </li>
-                  </ul>
-                </article>
-                <article>
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1">
-                    <h3 className="text-lg md:text-xl font-medium text-zinc-900 dark:text-zinc-100">
-                      SC Activemall SRL — Full Stack Developer
-                    </h3>
-                    <p className="text-zinc-600 dark:text-zinc-400">
-                      December 2013 - November 2021 · Galaţi, Romania
-                    </p>
-                  </div>
-                  <ul className="mt-3 list-disc list-inside space-y-2 text-zinc-700 dark:text-zinc-300">
-                    <li>
-                      Maintained a high‑performance REST API (PHP/CodeIgniter,
-                      MySQL, Memcached) serving 1M+ requests/day.
-                    </li>
-                    <li>
-                      Built a background auth worker for concurrent logins,
-                      improving reliability and speed.
-                    </li>
-                    <li>
-                      Advised an 8‑person team on performance, caching, and
-                      security best practices.
-                    </li>
-                    <li>
-                      Developed internal tools (CRM on Joomla → Phalcon) and a
-                      customer web app (Bonfire).
-                    </li>
-                  </ul>
-                </article>
-              </div>
-            </Section>
+            />
           </div>
 
           <aside className="relative lg:sticky lg:top-8 space-y-4 sm:space-y-6 md:space-y-8 h-fit">
@@ -478,105 +370,26 @@ function App() {
               </div>
             </Section>
 
-            <Section
-              id="skills"
-              title="Skills"
+            <SkillsSection
+              Section={Section}
+              Chip={Chip}
               isFlashing={flashingSection === "skills"}
-            >
-              <div className="flex flex-wrap gap-2">
-                <Chip>TypeScript</Chip>
-                <Chip>NestJS</Chip>
-                <Chip>Node.js</Chip>
-                <Chip>PostgreSQL</Chip>
-                <Chip>Redis</Chip>
-                <Chip>Azure</Chip>
-                <Chip>Kubernetes</Chip>
-                <Chip>PHP</Chip>
-                <Chip>.NET Core (C#)</Chip>
-              </div>
-            </Section>
+            />
 
-            <Section
-              id="languages"
-              title="Languages"
+            <LanguagesSection
+              Section={Section}
               isFlashing={flashingSection === "languages"}
-            >
-              <ul className="space-y-2">
-                <li>Romanian — Native or Bilingual</li>
-                <li>English — Professional Working</li>
-              </ul>
-            </Section>
+            />
 
-            <Section
-              id="certifications"
-              title="Certifications"
+            <CertificationsSection
+              Section={Section}
               isFlashing={flashingSection === "certifications"}
-            >
-              <div className="grid gap-3">
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--color-chip-light)] dark:bg-[var(--color-chip-dark)] border border-[var(--color-border-light)] dark:border-[var(--color-border-dark)] shadow-sm">
-                  <svg
-                    className="w-5 h-5 text-emerald-500"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12l2 2 4-4"
-                    />
-                  </svg>
-                  <span className="font-medium">The Git & Github Bootcamp</span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--color-chip-light)] dark:bg-[var(--color-chip-dark)] border border-[var(--color-border-light)] dark:border-[var(--color-border-dark)] shadow-sm">
-                  <svg
-                    className="w-5 h-5 text-emerald-500"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12l2 2 4-4"
-                    />
-                  </svg>
-                  <span className="font-medium">
-                    NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--color-chip-light)] dark:bg-[var(--color-chip-dark)] border border-[var(--color-border-light)] dark:border-[var(--color-border-dark)] shadow-sm">
-                  <svg
-                    className="w-5 h-5 text-emerald-500"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12l2 2 4-4"
-                    />
-                  </svg>
-                  <span className="font-medium">
-                    Agile Project Management: Scrum Step by Step with Examples
-                  </span>
-                </div>
-              </div>
-            </Section>
+            />
 
-            <Section
-              id="education"
-              title="Education"
+            <EducationSection
+              Section={Section}
               isFlashing={flashingSection === "education"}
-            >
-              <p>
-                Universitatea „Dunărea de Jos" din Galați — Automation (2009)
-              </p>
-            </Section>
+            />
           </aside>
         </main>
 
