@@ -11,7 +11,6 @@ import AppHeader from "./components/AppHeader";
 import QuickLinks from "./components/QuickLinks";
 import Section from "./components/Section";
 import MainLayout from "./components/MainLayout";
-import ThemeToggle from "./components/ThemeToggle";
 import Footer from "./components/Footer";
 import LightBackgroundSVG from "./components/LightBackgroundSVG";
 import DarkBackgroundSVG from "./components/DarkBackgroundSVG";
