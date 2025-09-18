@@ -2,13 +2,14 @@ import React from "react";
 import ProfilePic from "./ProfilePic";
 import ProfileTitle from "./ProfileTitle";
 import Chip from "./Chip";
+import ThemeToggle from "./ThemeToggle";
 
 export default function AppHeader({ isDark }: { isDark: boolean }) {
   return (
     <header className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-0">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-        <div className="flex justify-center sm:justify-start">
-          <div className="relative">
+        <div className="flex justify-center sm:justify-start items-center">
+          <div className="relative group flex items-center">
             {/* Floating profile card with animated border */}
             <div
               className="relative rounded-full p-1 bg-white dark:bg-zinc-900"
@@ -22,6 +23,13 @@ export default function AppHeader({ isDark }: { isDark: boolean }) {
                 alt="Cozmin Ungureanu"
                 className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-52 lg:h-52 xl:w-56 xl:h-56 rounded-full object-cover"
               />
+              {/* Theme toggle appears on avatar hover, positioned bottom right */}
+              <div
+                className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ pointerEvents: "auto" }}
+              >
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         </div>

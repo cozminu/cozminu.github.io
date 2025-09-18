@@ -71,10 +71,6 @@ function App() {
           }}
         />
         {/* Gradient animation CSS moved to App.css */}
-        {/* Always show theme toggle at top left */}
-        <div className="fixed top-3 right-3 z-50">
-          <ThemeToggle />
-        </div>
         <AppHeader isDark={isDark} />
 
         <MainLayout
