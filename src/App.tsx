@@ -5,7 +5,6 @@ import ExperienceSection from "./components/ExperienceSection";
 import SkillsSection from "./components/SkillsSection";
 import LanguagesSection from "./components/LanguagesSection";
 import CertificationsSection from "./components/CertificationsSection";
-import EducationSection from "./components/EducationSection";
 import React from "react";
 
 const ThemeContext = React.createContext<{
@@ -25,20 +24,24 @@ function Section(props: {
   return (
     <section
       id={props.id}
-      className={`backdrop-blur rounded-xl p-6 md:p-8 border shadow-sm transition-all duration-700
-        bg-[var(--color-section-light)] dark:bg-[var(--color-section-dark)]
-        border-[var(--color-border-light)] dark:border-[var(--color-border-dark)]
+      className={`rounded-2xl p-6 md:p-8 border transition-all duration-700
+        bg-white/30 dark:bg-zinc-900/40 backdrop-blur-xl shadow-xl border border-white/30 dark:border-zinc-800/40
         ${
           props.isFlashing
             ? "animate-pulse bg-blue-100/80 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700 shadow-lg shadow-blue-200/50 dark:shadow-blue-900/30"
             : ""
         }
       `}
+      style={{
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+        border: "1.5px solid rgba(255,255,255,0.18)",
+        backdropFilter: "blur(16px)",
+      }}
     >
-      <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] mb-3 md:mb-4">
+      <h2 className="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-pink-500 to-orange-400 mb-3 md:mb-4">
         {props.title}
       </h2>
-      <div className="text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] leading-relaxed">
+      <div className="text-zinc-800 dark:text-zinc-200 leading-relaxed">
         {props.children}
       </div>
     </section>
@@ -176,7 +179,7 @@ function App() {
         className="absolute inset-0 -z-10 pointer-events-none"
         aria-hidden="true"
       >
-        {/* Light mode background */}
+        {/* Light and dark mode backgrounds without blobs */}
         <svg
           className="w-full h-full block dark:hidden"
           viewBox="0 0 1440 900"
@@ -201,26 +204,7 @@ function App() {
             </radialGradient>
           </defs>
           <rect width="1440" height="900" fill="url(#lightBg)" />
-          <ellipse
-            cx="1200"
-            cy="100"
-            rx="300"
-            ry="120"
-            fill="#a5b4fc"
-            fillOpacity="0.28"
-            style={{ animation: "float1 7s ease-in-out infinite" }}
-          />
-          <ellipse
-            cx="300"
-            cy="800"
-            rx="250"
-            ry="80"
-            fill="#fbbf24"
-            fillOpacity="0.13"
-            style={{ animation: "float2 9s ease-in-out infinite" }}
-          />
         </svg>
-        {/* Dark mode background */}
         <svg
           className="w-full h-full hidden dark:block"
           viewBox="0 0 1440 900"
@@ -244,27 +228,36 @@ function App() {
             </radialGradient>
           </defs>
           <rect width="1440" height="900" fill="url(#darkBg)" />
-          <ellipse
-            cx="1200"
-            cy="100"
-            rx="300"
-            ry="120"
-            fill="#6366f1"
-            fillOpacity="0.12"
-            style={{ animation: "float1 7s ease-in-out infinite" }}
-          />
-          <ellipse
-            cx="300"
-            cy="800"
-            rx="250"
-            ry="80"
-            fill="#fbbf24"
-            fillOpacity="0.05"
-            style={{ animation: "float2 9s ease-in-out infinite" }}
-          />
         </svg>
       </div>
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-4 sm:py-8 md:py-12 relative">
+        {/* Animated gradient header background */}
+        {/* Responsive header gradient for light/dark mode */}
+        <div
+          className={
+            `absolute top-0 left-0 w-full h-64 -z-10 animate-gradient-move ` +
+            (isDark
+              ? "bg-gradient-to-br from-indigo-900 via-fuchsia-700 to-cyan-500"
+              : "bg-gradient-to-br from-indigo-400 via-pink-400 to-orange-300")
+          }
+          style={{
+            boxShadow: isDark
+              ? "0 4px 32px 0 rgba(80, 17, 204, 0.25), 0 2px 16px 0 rgba(6, 182, 212, 0.18)"
+              : "0 4px 32px 0 rgba(99, 102, 241, 0.18), 0 2px 16px 0 rgba(251, 191, 36, 0.13)",
+            opacity: 0.95,
+          }}
+        />
+        <style>{`
+          @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          .animate-gradient-move {
+            background-size: 200% 200%;
+            animation: gradient-move 8s ease-in-out infinite;
+          }
+        `}</style>
         {/* Always show theme toggle at top left */}
         <div className="fixed top-3 right-3 z-50">
           <ThemeToggle />
@@ -273,7 +266,14 @@ function App() {
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <div className="flex justify-center sm:justify-start">
               <div className="relative">
-                <div className="relative rounded-full ring-1 ring-zinc-200 dark:ring-zinc-800 p-1 bg-white dark:bg-zinc-900">
+                {/* Floating profile card with animated border */}
+                <div
+                  className="relative rounded-full p-1 bg-white dark:bg-zinc-900"
+                  style={{
+                    boxShadow:
+                      "0 0 0 6px #fff, 0 0 24px 0 #6366f1, 0 0 24px 0 #f59e42, 0 0 24px 0 #22d3ee, 0 0 24px 0 #a21caf",
+                  }}
+                >
                   <ProfilePic
                     src={isDark ? "profile_dark.jpg" : "profile.jpg"}
                     alt="Cozmin Ungureanu"
@@ -384,11 +384,6 @@ function App() {
             <CertificationsSection
               Section={Section}
               isFlashing={flashingSection === "certifications"}
-            />
-
-            <EducationSection
-              Section={Section}
-              isFlashing={flashingSection === "education"}
             />
           </aside>
         </main>

@@ -19,7 +19,7 @@ export default function ExperienceSection({
               January 2025 - Present · Remote
             </p>
           </div>
-          <ul className="mt-3 list-disc list-inside space-y-2 text-zinc-700 dark:text-zinc-300">
+          <ul className="mt-3 list-disc list-inside space-y-2 text-sm md:text-xs text-zinc-700 dark:text-zinc-300">
             <li>Implemented new features to payment system.</li>
             <li>
               Designed and implemented JavaCard Applet for payment processing.
@@ -35,7 +35,7 @@ export default function ExperienceSection({
               July 2023 - January 2025 · Remote
             </p>
           </div>
-          <ul className="mt-3 list-disc list-inside space-y-2 text-zinc-700 dark:text-zinc-300">
+          <ul className="mt-3 list-disc list-inside space-y-2 text-sm md:text-xs text-zinc-700 dark:text-zinc-300">
             <li>
               Designed and implemented key integrations for an AI-powered
               digital assistant, including custom APIs bridging legacy systems
@@ -68,7 +68,7 @@ export default function ExperienceSection({
               October 2022 - July 2023 · Remote
             </p>
           </div>
-          <ul className="mt-3 list-disc list-inside space-y-2 text-zinc-700 dark:text-zinc-300">
+          <ul className="mt-3 list-disc list-inside space-y-2 text-sm md:text-xs text-zinc-700 dark:text-zinc-300">
             <li>
               Developed a REST API with NestJS and PostgreSQL serving customer,
               broker, and supplier apps.
@@ -93,7 +93,7 @@ export default function ExperienceSection({
               December 2013 - November 2021 · Galaţi, Romania
             </p>
           </div>
-          <ul className="mt-3 list-disc list-inside space-y-2 text-zinc-700 dark:text-zinc-300">
+          <ul className="mt-3 list-disc list-inside space-y-2 text-sm md:text-xs text-zinc-700 dark:text-zinc-300">
             <li>
               Maintained a high‑performance REST API (PHP/CodeIgniter, MySQL,
               Memcached) serving 1M+ requests/day.
