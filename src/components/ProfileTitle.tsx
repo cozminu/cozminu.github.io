@@ -1,11 +1,15 @@
-import './ProfileTitle.css';
+type ProfileTitleProps = {
+  name: string;
+  title: string;
+  location?: string;
+};
 
-function ProfileTitle(props: any) {
+function ProfileTitle(props: ProfileTitleProps) {
   return (
     <div className="ProfileTitle">
-      <h1>Cozmin Ungureanu</h1>
-      <h2>Full Stack Web Developer</h2>
-      <h3>NodeJS | TypeScript | Fun stuff</h3>
+      <h1>{props.name}</h1>
+      <h2>{props.title}</h2>
+      {props.location ? <h3>{props.location}</h3> : null}
     </div>
   );
 }
