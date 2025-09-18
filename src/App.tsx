@@ -19,16 +19,20 @@ function Section(props: {
   return (
     <section
       id={props.id}
-      className={`bg-white/60 dark:bg-zinc-900/50 backdrop-blur rounded-xl p-6 md:p-8 border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all duration-300 ${
-        props.isFlashing
-          ? "animate-pulse bg-blue-100/80 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700 shadow-lg shadow-blue-200/50 dark:shadow-blue-900/30"
-          : ""
-      }`}
+      className={`backdrop-blur rounded-xl p-6 md:p-8 border shadow-sm transition-all duration-700
+        bg-[var(--color-section-light)] dark:bg-[var(--color-section-dark)]
+        border-[var(--color-border-light)] dark:border-[var(--color-border-dark)]
+        ${
+          props.isFlashing
+            ? "animate-pulse bg-blue-100/80 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700 shadow-lg shadow-blue-200/50 dark:shadow-blue-900/30"
+            : ""
+        }
+      `}
     >
-      <h2 className="text-xl md:text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-3 md:mb-4">
+      <h2 className="text-xl md:text-2xl font-semibold text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] mb-3 md:mb-4">
         {props.title}
       </h2>
-      <div className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
+      <div className="text-[var(--color-text-light)] dark:text-[var(--color-text-dark)] leading-relaxed">
         {props.children}
       </div>
     </section>
@@ -106,14 +110,25 @@ function ThemeToggle() {
 
 function Chip(props: { children: any }) {
   return (
-    <span className="inline-flex items-center rounded-full bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 px-3 py-1 text-xs font-medium">
+    <span
+      className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium border transition-colors duration-300 hover:shadow hover:bg-indigo-100 dark:hover:bg-indigo-900"
+      style={{
+        background: "var(--color-chip-light)",
+        color: "var(--color-text-light)",
+        borderColor: "var(--color-border-light)",
+      }}
+      data-dark={
+        typeof window !== "undefined" &&
+        document.documentElement.classList.contains("dark")
+      }
+    >
       {props.children}
     </span>
   );
 }
 
 function App() {
-  const [theme, setTheme] = useTheme();
+  const [theme] = useTheme();
   const isDark = theme === "dark";
   const [flashingSection, setFlashingSection] = React.useState<string | null>(
     null
@@ -137,7 +152,111 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-50 via-white to-zinc-50 dark:from-zinc-950 dark:via-zinc-900 dark:to-black text-zinc-800 dark:text-zinc-200">
+    <div className="min-h-screen relative text-zinc-800 dark:text-zinc-200">
+      {/* Decorative background for light mode */}
+      <style>{`
+        @keyframes float1 {
+          0% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(30px) scale(1.04); }
+          100% { transform: translateY(0px) scale(1); }
+        }
+        @keyframes float2 {
+          0% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-20px) scale(0.98); }
+          100% { transform: translateY(0px) scale(1); }
+        }
+      `}</style>
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none"
+        aria-hidden="true"
+      >
+        {/* Light mode background */}
+        <svg
+          className="w-full h-full block dark:hidden"
+          viewBox="0 0 1440 900"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <radialGradient
+              id="lightBg"
+              cx="50%"
+              cy="40%"
+              r="80%"
+              fx="50%"
+              fy="40%"
+              gradientTransform="rotate(10)"
+            >
+              <stop offset="0%" stopColor="#e0e7ff" stopOpacity="0.35" />
+              <stop offset="60%" stopColor="#f3f4f6" stopOpacity="0.7" />
+              <stop offset="100%" stopColor="#e5e7eb" stopOpacity="1" />
+            </radialGradient>
+          </defs>
+          <rect width="1440" height="900" fill="url(#lightBg)" />
+          <ellipse
+            cx="1200"
+            cy="100"
+            rx="300"
+            ry="120"
+            fill="#c7d2fe"
+            fillOpacity="0.18"
+            style={{ animation: "float1 7s ease-in-out infinite" }}
+          />
+          <ellipse
+            cx="300"
+            cy="800"
+            rx="250"
+            ry="80"
+            fill="#fbbf24"
+            fillOpacity="0.08"
+            style={{ animation: "float2 9s ease-in-out infinite" }}
+          />
+        </svg>
+        {/* Dark mode background */}
+        <svg
+          className="w-full h-full hidden dark:block"
+          viewBox="0 0 1440 900"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <radialGradient
+              id="darkBg"
+              cx="50%"
+              cy="40%"
+              r="80%"
+              fx="50%"
+              fy="40%"
+              gradientTransform="rotate(10)"
+            >
+              <stop offset="0%" stopColor="#6366f1" stopOpacity="0.18" />
+              <stop offset="60%" stopColor="#23272f" stopOpacity="0.7" />
+              <stop offset="100%" stopColor="#18181b" stopOpacity="1" />
+            </radialGradient>
+          </defs>
+          <rect width="1440" height="900" fill="url(#darkBg)" />
+          <ellipse
+            cx="1200"
+            cy="100"
+            rx="300"
+            ry="120"
+            fill="#6366f1"
+            fillOpacity="0.12"
+            style={{ animation: "float1 7s ease-in-out infinite" }}
+          />
+          <ellipse
+            cx="300"
+            cy="800"
+            rx="250"
+            ry="80"
+            fill="#fbbf24"
+            fillOpacity="0.05"
+            style={{ animation: "float2 9s ease-in-out infinite" }}
+          />
+        </svg>
+      </div>
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-4 sm:py-8 md:py-12">
         <header className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-0">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
@@ -363,12 +482,17 @@ function App() {
               title="Skills"
               isFlashing={flashingSection === "skills"}
             >
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <li>TypeScript, NestJS, Node.js</li>
-                <li>PostgreSQL, Redis</li>
-                <li>Azure (Blob Storage), Kubernetes</li>
-                <li>PHP, .NET Core (C#)</li>
-              </ul>
+              <div className="flex flex-wrap gap-2">
+                <Chip>TypeScript</Chip>
+                <Chip>NestJS</Chip>
+                <Chip>Node.js</Chip>
+                <Chip>PostgreSQL</Chip>
+                <Chip>Redis</Chip>
+                <Chip>Azure</Chip>
+                <Chip>Kubernetes</Chip>
+                <Chip>PHP</Chip>
+                <Chip>.NET Core (C#)</Chip>
+              </div>
             </Section>
 
             <Section
@@ -387,15 +511,60 @@ function App() {
               title="Certifications"
               isFlashing={flashingSection === "certifications"}
             >
-              <ul className="space-y-2">
-                <li>The Git & Github Bootcamp</li>
-                <li>
-                  NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)
-                </li>
-                <li>
-                  Agile Project Management: Scrum Step by Step with Examples
-                </li>
-              </ul>
+              <div className="grid gap-3">
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--color-chip-light)] dark:bg-[var(--color-chip-dark)] border border-[var(--color-border-light)] dark:border-[var(--color-border-dark)] shadow-sm">
+                  <svg
+                    className="w-5 h-5 text-emerald-500"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 12l2 2 4-4"
+                    />
+                  </svg>
+                  <span className="font-medium">The Git & Github Bootcamp</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--color-chip-light)] dark:bg-[var(--color-chip-dark)] border border-[var(--color-border-light)] dark:border-[var(--color-border-dark)] shadow-sm">
+                  <svg
+                    className="w-5 h-5 text-emerald-500"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 12l2 2 4-4"
+                    />
+                  </svg>
+                  <span className="font-medium">
+                    NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-[var(--color-chip-light)] dark:bg-[var(--color-chip-dark)] border border-[var(--color-border-light)] dark:border-[var(--color-border-dark)] shadow-sm">
+                  <svg
+                    className="w-5 h-5 text-emerald-500"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 12l2 2 4-4"
+                    />
+                  </svg>
+                  <span className="font-medium">
+                    Agile Project Management: Scrum Step by Step with Examples
+                  </span>
+                </div>
+              </div>
             </Section>
 
             <Section
