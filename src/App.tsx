@@ -188,9 +188,10 @@ function App() {
               fy="40%"
               gradientTransform="rotate(10)"
             >
-              <stop offset="0%" stopColor="#e0e7ff" stopOpacity="0.35" />
-              <stop offset="60%" stopColor="#f3f4f6" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#e5e7eb" stopOpacity="1" />
+              <stop offset="0%" stopColor="#a5b4fc" stopOpacity="0.55" />
+              <stop offset="50%" stopColor="#e0e7ff" stopOpacity="0.7" />
+              <stop offset="80%" stopColor="#f3f4f6" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#fff" stopOpacity="1" />
             </radialGradient>
           </defs>
           <rect width="1440" height="900" fill="url(#lightBg)" />
@@ -199,8 +200,8 @@ function App() {
             cy="100"
             rx="300"
             ry="120"
-            fill="#c7d2fe"
-            fillOpacity="0.18"
+            fill="#a5b4fc"
+            fillOpacity="0.28"
             style={{ animation: "float1 7s ease-in-out infinite" }}
           />
           <ellipse
@@ -209,7 +210,7 @@ function App() {
             rx="250"
             ry="80"
             fill="#fbbf24"
-            fillOpacity="0.08"
+            fillOpacity="0.13"
             style={{ animation: "float2 9s ease-in-out infinite" }}
           />
         </svg>
