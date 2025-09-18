@@ -1,11 +1,15 @@
 import ProfilePic from "./components/ProfilePic";
 import ProfileTitle from "./components/ProfileTitle";
+import GitHubStats from "./components/GitHubStats";
 import SummarySection from "./components/SummarySection";
 import ExperienceSection from "./components/ExperienceSection";
 import SkillsSection from "./components/SkillsSection";
 import LanguagesSection from "./components/LanguagesSection";
 import CertificationsSection from "./components/CertificationsSection";
+import FloatingContactButton from "./components/FloatingContactButton";
+import ProjectsSection from "./components/ProjectsSection";
 import React from "react";
+import { motion } from "framer-motion";
 
 const ThemeContext = React.createContext<{
   theme: string;
@@ -88,9 +92,10 @@ function ThemeToggle() {
   const isDark = theme === "dark";
   return (
     <button
-      aria-label="Toggle theme"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className="p-2 rounded-full bg-white/70 dark:bg-zinc-900 hover:bg-white/90 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 transition-colors"
+      tabIndex={0}
     >
       {isDark ? (
         <svg
@@ -282,35 +287,37 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="text-center sm:text-left">
-              <ProfileTitle
-                name="Cozmin Ungureanu"
-                title="Senior Software Developer | Node.js & TypeScript"
-                location="Braşov, Romania"
-              />
-              <div className="mt-3 flex flex-wrap justify-center sm:justify-start gap-2">
-                <Chip>Senior Software Developer</Chip>
-                <Chip>Node.js</Chip>
-                <Chip>TypeScript</Chip>
-                <Chip>NestJS</Chip>
-                <Chip>Azure</Chip>
-              </div>
-              <div className="mt-3 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-2 sm:gap-4 text-sm text-zinc-600 dark:text-zinc-400">
-                <a
-                  className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
-                  href="mailto:ucozmin@gmail.com"
-                >
-                  ucozmin@gmail.com
-                </a>
-                <span className="hidden sm:inline opacity-30">•</span>
-                <a
-                  className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
-                  href="https://www.linkedin.com/in/nodejs-dev"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  LinkedIn
-                </a>
+            <div className="text-center sm:text-left flex flex-col gap-4">
+              <div>
+                <ProfileTitle
+                  name="Cozmin Ungureanu"
+                  title="Senior Software Developer | Node.js & TypeScript"
+                  location="Braşov, Romania"
+                />
+                <div className="mt-3 flex flex-wrap justify-center sm:justify-start gap-2">
+                  <Chip>Senior Software Developer</Chip>
+                  <Chip>Node.js</Chip>
+                  <Chip>TypeScript</Chip>
+                  <Chip>NestJS</Chip>
+                  <Chip>Azure</Chip>
+                </div>
+                <div className="mt-3 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-2 sm:gap-4 text-sm text-zinc-600 dark:text-zinc-400">
+                  <a
+                    className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+                    href="mailto:ucozmin@gmail.com"
+                  >
+                    ucozmin@gmail.com
+                  </a>
+                  <span className="hidden sm:inline opacity-30">•</span>
+                  <a
+                    className="hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+                    href="https://www.linkedin.com/in/nodejs-dev"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -322,51 +329,101 @@ function App() {
               Section={Section}
               isFlashing={flashingSection === "summary"}
             />
+            <ProjectsSection
+              Section={Section}
+              isFlashing={flashingSection === "projects"}
+            />
             <ExperienceSection
               Section={Section}
               isFlashing={flashingSection === "experience"}
             />
+            {/* GitHub stats as a separate section */}
+            <Section id="github-stats" title="GitHub Activity">
+              <GitHubStats />
+            </Section>
           </div>
 
           <aside className="relative lg:sticky lg:top-8 space-y-4 sm:space-y-6 md:space-y-8 h-fit">
             <Section id="quick-links" title="Quick Links">
               <div className="flex flex-wrap justify-center sm:justify-start gap-2">
-                <button
+                <motion.button
+                  whileHover={{
+                    scale: 1.08,
+                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
+                  }}
+                  whileTap={{ scale: 0.96 }}
                   className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
                   onClick={() => handleQuickLinkClick("summary")}
+                  aria-label="Jump to Summary section"
+                  tabIndex={0}
                 >
                   Summary
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{
+                    scale: 1.08,
+                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
+                  }}
+                  whileTap={{ scale: 0.96 }}
+                  className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
+                  onClick={() => handleQuickLinkClick("projects")}
+                  aria-label="Jump to Featured Projects section"
+                  tabIndex={0}
+                >
+                  Featured Projects
+                </motion.button>
+                <motion.button
+                  whileHover={{
+                    scale: 1.08,
+                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
+                  }}
+                  whileTap={{ scale: 0.96 }}
                   className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
                   onClick={() => handleQuickLinkClick("experience")}
+                  aria-label="Jump to Experience section"
+                  tabIndex={0}
                 >
                   Experience
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{
+                    scale: 1.08,
+                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
+                  }}
+                  whileTap={{ scale: 0.96 }}
                   className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
                   onClick={() => handleQuickLinkClick("skills")}
+                  aria-label="Jump to Skills section"
+                  tabIndex={0}
                 >
                   Skills
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{
+                    scale: 1.08,
+                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
+                  }}
+                  whileTap={{ scale: 0.96 }}
                   className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
                   onClick={() => handleQuickLinkClick("languages")}
+                  aria-label="Jump to Languages section"
+                  tabIndex={0}
                 >
                   Languages
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileHover={{
+                    scale: 1.08,
+                    boxShadow: "0 4px 16px rgba(99,102,241,0.12)",
+                  }}
+                  whileTap={{ scale: 0.96 }}
                   className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
                   onClick={() => handleQuickLinkClick("certifications")}
+                  aria-label="Jump to Certifications section"
+                  tabIndex={0}
                 >
                   Certifications
-                </button>
-                <button
-                  className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-200 transition-colors dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-100 dark:border-zinc-700"
-                  onClick={() => handleQuickLinkClick("education")}
-                >
-                  Education
-                </button>
+                </motion.button>
               </div>
             </Section>
 
@@ -392,6 +449,7 @@ function App() {
           © {new Date().getFullYear()} Cozmin Ungureanu
         </footer>
       </div>
+      <FloatingContactButton />
     </div>
   );
 }
