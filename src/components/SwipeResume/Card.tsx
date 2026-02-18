@@ -48,22 +48,22 @@ export default function Card({ data, onSwipe, index }: CardProps) {
     switch (data.type) {
       case 'INTRO':
         return (
-          <div className="flex flex-col h-full bg-white dark:bg-zinc-900">
+          <div className="flex flex-col h-full bg-white dark:bg-zinc-900" draggable={false}>
              {/* Top Half: Image */}
-            <div className="h-1/2 w-full relative shrink-0">
+            <div className="h-6/10 w-full relative shrink-0">
                <img
                  src={isDark ? 'profile_dark.jpg' : 'profile.jpg'}
                  alt={data.data.name}
                  className="w-full h-full object-cover"
                  draggable={false} // Prevent image drag interfering with card drag
                />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4 md:hidden">
+               {false && <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4 md:hidden">
                   {/* Mobile overlay text if needed */}
-               </div>
+               </div>}
             </div>
 
             {/* Bottom Half: Content */}
-            <div className="h-1/2 flex flex-col items-center justify-center p-6 text-center space-y-4 overflow-y-auto">
+            <div className="h-auto flex flex-col items-center justify-center p-6 text-center space-y-4">
                <div>
                   <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{data.data.name}</h1>
                   <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium">{data.data.label}</p>
@@ -72,7 +72,7 @@ export default function Card({ data, onSwipe, index }: CardProps) {
                   <MapPin className="w-4 h-4 mr-1" />
                   <span>{data.data.location.city}, {data.data.location.region}</span>
                </div>
-               <div className="pt-4">
+               <div className="flex">
                   <p className="text-gray-500 dark:text-gray-400 italic text-sm animate-pulse">
                     &larr; Swipe to explore &rarr;
                   </p>
@@ -83,7 +83,7 @@ export default function Card({ data, onSwipe, index }: CardProps) {
 
       case 'ABOUT':
         return (
-          <div className="flex flex-col h-full p-8 overflow-y-auto">
+          <div className="flex flex-col h-full p-8">
             <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">About Me</h2>
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
               {data.data.summary}
@@ -94,7 +94,7 @@ export default function Card({ data, onSwipe, index }: CardProps) {
       case 'EXPERIENCE':
         const job = data.data;
         return (
-          <div className="flex flex-col h-full p-6 overflow-y-auto">
+          <div className="flex flex-col h-full p-6">
             <div className="mb-4">
               <span className="text-xs font-bold tracking-wider text-indigo-500 uppercase">Experience</span>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{job.position}</h2>
@@ -127,7 +127,7 @@ export default function Card({ data, onSwipe, index }: CardProps) {
                  <h2 className="text-2xl font-bold text-white">{project.name}</h2>
                </div>
             </div>
-            <div className="p-6 flex-1 overflow-y-auto">
+            <div className="p-6 flex-1">
               <p className="text-gray-700 dark:text-gray-300 mb-4">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.keywords.map((tech: string) => (
@@ -151,7 +151,7 @@ export default function Card({ data, onSwipe, index }: CardProps) {
 
       case 'SKILLS':
         return (
-           <div className="flex flex-col h-full p-6 overflow-y-auto">
+           <div className="flex flex-col h-full p-6">
              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">Skills</h2>
              <div className="flex flex-wrap gap-2">
                {data.data.map((skill: any) => (
@@ -210,14 +210,14 @@ export default function Card({ data, onSwipe, index }: CardProps) {
         zIndex,
         scale,
         opacity: isFront ? opacity : opacityVal,
-        touchAction: 'pan-y', // Allow vertical scroll, but let Framer handle horizontal
+        touchAction: (data.type === 'INTRO' || data.type === 'MATCH') ? 'none' : 'pan-y',
       }}
       animate={controls}
-      drag={isFront ? 'x' : false}
+      drag="x"
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.7}
       onDragEnd={handleDragEnd}
-      className={`absolute top-0 left-0 w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 origin-bottom
+      className={`absolute top-0 left-0 w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 origin-bottom select-none
          ${isFront ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none'}`}
     >
       {/* Swipe Feedback Overlays */}

@@ -14,7 +14,7 @@ const resumeData = profileData as unknown as ResumeData;
 export default function SwipeResume() {
   const cards = useMemo(() => transformResumeToCards(resumeData), []);
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const [score, setScore] = useState(0); // Keeping for potential future use
+  const [score, setScore] = useState(0); // Keeping for potential future use
   const [history, setHistory] = useState<{ index: number; action: 'left' | 'right' }[]>([]);
 
   const handleSwipe = useCallback((id: string, direction: 'left' | 'right') => {
@@ -22,9 +22,9 @@ export default function SwipeResume() {
     setHistory(prev => [...prev, { index: currentIndex, action: direction }]);
 
     // Update score (simple logic: right swipe = interest)
-    // if (direction === 'right') {
-    //   setScore(prev => prev + 10);
-    // }
+    if (direction === 'right') {
+      setScore(prev => prev + 10);
+    }
 
     // Advance to next card
     setCurrentIndex(prev => prev + 1);
@@ -38,18 +38,18 @@ export default function SwipeResume() {
     setCurrentIndex(lastAction.index);
 
     if (lastAction.action === 'right') {
-      // setScore(prev => prev - 10);
+      setScore(prev => prev - 10);
     }
   }, [history]);
 
   // Restart handler
   const handleRestart = () => {
     setCurrentIndex(0);
-    // setScore(0);
+    setScore(0);
     setHistory([]);
   };
 
-  const isFinished = currentIndex >= cards.length;
+  const isFinished = currentIndex + 1 >= cards.length;
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-black flex flex-col items-center justify-center p-4 overflow-hidden relative transition-colors duration-300">
@@ -61,49 +61,49 @@ export default function SwipeResume() {
         <div className="absolute -bottom-8 left-20 w-[500px] h-[500px] bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
       </div>
 
-       {/* Top Bar */}
-       <div className="absolute top-4 right-4 z-50">
-         <ThemeToggle />
-       </div>
+      {/* Top Bar */}
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
 
       <div className="w-full max-w-sm flex flex-col items-center z-10 relative">
-        <ProgressBar current={Math.min(currentIndex + 1, cards.length)} total={cards.length} />
+        {!isFinished && <ProgressBar current={Math.min(currentIndex + 1, cards.length)} total={cards.length} />}
 
         <div className="my-8 w-full">
-            {isFinished ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="bg-white dark:bg-zinc-900 rounded-3xl p-8 text-center shadow-xl border border-gray-200 dark:border-zinc-800"
-              >
-                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">All caught up!</h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">You've seen all the cards.</p>
-                <div className="flex gap-4 justify-center">
-                    <button
-                        onClick={handleRestart}
-                        className="px-6 py-2 bg-indigo-600 text-white rounded-full font-bold hover:bg-indigo-700 transition"
-                    >
-                        Start Over
-                    </button>
-                    {/* Add download PDF button if needed here too */}
-                </div>
-              </motion.div>
-            ) : (
-                <CardStack
-                    cards={cards}
-                    currentIndex={currentIndex}
-                    onSwipe={handleSwipe}
-                />
-            )}
+          {false ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white dark:bg-zinc-900 rounded-3xl p-8 text-center shadow-xl border border-gray-200 dark:border-zinc-800"
+            >
+              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">You've reached the end!</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">But let's be honest, I'm worth a second look. 😉</p>
+              <div className="flex gap-4 justify-center">
+                <button
+                  onClick={handleRestart}
+                  className="px-6 py-2 bg-indigo-600 text-white rounded-full font-bold hover:bg-indigo-700 transition"
+                >
+                  Start Over
+                </button>
+                {/* Add download PDF button if needed here too */}
+              </div>
+            </motion.div>
+          ) : (
+            <CardStack
+              cards={cards}
+              currentIndex={currentIndex}
+              onSwipe={isFinished ? handleRestart : handleSwipe}
+            />
+          )}
         </div>
 
         {!isFinished && (
-           <Controls
-             onVote={(dir) => handleSwipe(cards[currentIndex].id, dir)}
-             onUndo={handleUndo}
-             canUndo={history.length > 0}
-             disabled={isFinished}
-           />
+          <Controls
+            onVote={(dir) => handleSwipe(cards[currentIndex].id, dir)}
+            onUndo={handleUndo}
+            canUndo={history.length > 0}
+            disabled={isFinished}
+          />
         )}
       </div>
     </div>
