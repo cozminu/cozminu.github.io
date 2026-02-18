@@ -1,0 +1,179 @@
+{
+  "basics": {
+    "name": "Cozmin Ungureanu",
+    "label": "Senior Software Developer | Node.js & TypeScript",
+    "image": "profile.jpg",
+    "email": "ucozmin@gmail.com",
+    "phone": "",
+    "url": "https://cozminu.github.io",
+    "summary": "Senior Software Developer with 10+ years of experience in building scalable, high-performance applications across telecommunications, energy, and pharma industries. Proficient in TypeScript, NestJS, Node.js, PHP, and cloud services like Azure.",
+    "location": {
+      "address": "",
+      "postalCode": "",
+      "city": "Braşov",
+      "countryCode": "RO",
+      "region": "Romania"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "nodejs-dev",
+        "url": "https://www.linkedin.com/in/nodejs-dev"
+      },
+      {
+        "network": "GitHub",
+        "username": "cozminu",
+        "url": "https://github.com/cozminu"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "BreakPoint IT",
+      "position": "Back-end Developer",
+      "url": "",
+      "startDate": "2025-01-01",
+      "endDate": "",
+      "summary": "Remote",
+      "highlights": [
+        "Implemented new features to payment system.",
+        "Designed and implemented JavaCard Applet for payment processing."
+      ]
+    },
+    {
+      "name": "Cognizant",
+      "position": "Senior Software Engineer",
+      "url": "",
+      "startDate": "2023-07-01",
+      "endDate": "2025-01-01",
+      "summary": "Remote",
+      "highlights": [
+        "Designed and implemented key integrations for an AI-powered digital assistant, including custom APIs bridging legacy systems (.NET Core, C#, NestJS).",
+        "Built a NestJS chat API as a wrapper for ChatGPT for dynamic responses across enterprise systems.",
+        "Optimized large-data handling via concurrent calls, Azure Blob CSV uploads, and streaming (200K+ items).",
+        "Orchestrated NestJS cron workloads on Kubernetes for ServiceNow, Sailpoint, and Workday syncs.",
+        "Remediated WAST vulnerabilities to meet pharma-grade data security requirements."
+      ]
+    },
+    {
+      "name": "Cognizant Softvision",
+      "position": "Senior Software Engineer",
+      "url": "",
+      "startDate": "2022-10-01",
+      "endDate": "2023-07-01",
+      "summary": "Remote",
+      "highlights": [
+        "Developed a REST API with NestJS and PostgreSQL serving customer, broker, and supplier apps.",
+        "Partnered with frontend, QA, and product for seamless integration and UX.",
+        "Integrated Redis and third‑party providers; identified scalability bottlenecks early.",
+        "Upskilled rapidly in TypeScript, NestJS, and PostgreSQL."
+      ]
+    },
+    {
+      "name": "SC Activemall SRL",
+      "position": "Full Stack Developer",
+      "url": "",
+      "startDate": "2013-12-01",
+      "endDate": "2021-11-01",
+      "summary": "Galaţi, Romania",
+      "highlights": [
+        "Maintained a high‑performance REST API (PHP/CodeIgniter, MySQL, Memcached) serving 1M+ requests/day.",
+        "Built a background auth worker for concurrent logins, improving reliability and speed.",
+        "Advised an 8‑person team on performance, caching, and security best practices.",
+        "Developed internal tools (CRM on Joomla → Phalcon) and a customer web app (Bonfire)."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "AI Assistant Integration",
+      "description": "Enterprise digital assistant with custom APIs, ChatGPT wrapper, and large-data streaming for pharma clients.",
+      "highlights": [
+        "200K+ items processed",
+        "Pharma-grade security",
+        "99.99% uptime"
+      ],
+      "keywords": ["NestJS", "TypeScript", "Azure", "Kubernetes", "ChatGPT"],
+      "url": "",
+      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "Payment System Upgrade",
+      "description": "JavaCard Applet and backend features for secure, scalable payment processing across multiple platforms.",
+      "highlights": [
+        "Enabled new payment flows",
+        "Improved reliability",
+        "Reduced fraud risk"
+      ],
+      "keywords": ["JavaCard", "Node.js", "TypeScript", "PostgreSQL"],
+      "url": "",
+      "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "REST API Platform",
+      "description": "High-performance REST API serving 1M+ requests/day, with caching, background workers, and internal tools.",
+      "highlights": [
+        "1M+ daily requests",
+        "8-person team mentored",
+        "Seamless integrations"
+      ],
+      "keywords": ["PHP", "CodeIgniter", "MySQL", "Memcached", "Joomla", "Phalcon"],
+      "url": "",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+    }
+  ],
+  "skills": [
+    {
+      "name": "TypeScript",
+      "level": "Senior",
+      "keywords": ["Frontend", "Backend"]
+    },
+    {
+      "name": "NestJS",
+      "level": "Senior",
+      "keywords": ["Backend", "Framework"]
+    },
+    {
+      "name": "Node.js",
+      "level": "Senior",
+      "keywords": ["Backend", "Runtime"]
+    },
+    {
+      "name": "PostgreSQL",
+      "level": "Mid-Senior",
+      "keywords": ["Database"]
+    },
+    {
+      "name": "Redis",
+      "level": "Mid",
+      "keywords": ["Cache"]
+    },
+    {
+      "name": "Azure",
+      "level": "Mid",
+      "keywords": ["Cloud"]
+    },
+    {
+      "name": "Kubernetes",
+      "level": "Mid",
+      "keywords": ["DevOps"]
+    },
+    {
+      "name": "PHP",
+      "level": "Senior",
+      "keywords": ["Backend"]
+    },
+    {
+      "name": ".NET Core",
+      "level": "Mid",
+      "keywords": ["Backend"]
+    }
+  ],
+  "config": {
+    "theme": {
+      "primary": "#6366f1",
+      "secondary": "#ec4899"
+    },
+    "matchThreshold": 50
+  }
+}
