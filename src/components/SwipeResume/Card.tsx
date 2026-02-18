@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { motion, useMotionValue, useTransform, useAnimation, PanInfo } from 'framer-motion';
 import { CardData } from '../../types/resume';
-import { MapPin, Calendar, Building, ExternalLink, Mail, Linkedin, Github } from 'lucide-react';
+import { MapPin, Calendar, Building } from 'lucide-react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 interface CardProps {
   data: CardData;
@@ -13,6 +14,8 @@ export default function Card({ data, onSwipe, index }: CardProps) {
   const x = useMotionValue(0);
   const controls = useAnimation();
   const isFront = index === 0;
+  const { theme } = useContext(ThemeContext);
+  const isDark = theme === 'dark';
 
   // Visual stacking logic
   const scale = 1 - index * 0.05;
@@ -45,21 +48,36 @@ export default function Card({ data, onSwipe, index }: CardProps) {
     switch (data.type) {
       case 'INTRO':
         return (
-          <div className="flex flex-col items-center justify-center h-full text-center p-6 space-y-6">
-            <div className="relative">
-              <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                <img src={data.data.image} alt={data.data.name} className="w-full h-full object-cover" />
-              </div>
+          <div className="flex flex-col h-full bg-white dark:bg-zinc-900">
+             {/* Top Half: Image */}
+            <div className="h-1/2 w-full relative shrink-0">
+               <img
+                 src={isDark ? 'profile_dark.jpg' : 'profile.jpg'}
+                 alt={data.data.name}
+                 className="w-full h-full object-cover"
+                 draggable={false} // Prevent image drag interfering with card drag
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4 md:hidden">
+                  {/* Mobile overlay text if needed */}
+               </div>
             </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{data.data.name}</h1>
-              <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium">{data.data.label}</p>
+
+            {/* Bottom Half: Content */}
+            <div className="h-1/2 flex flex-col items-center justify-center p-6 text-center space-y-4 overflow-y-auto">
+               <div>
+                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{data.data.name}</h1>
+                  <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium">{data.data.label}</p>
+               </div>
+               <div className="flex items-center text-gray-500 dark:text-gray-400">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  <span>{data.data.location.city}, {data.data.location.region}</span>
+               </div>
+               <div className="pt-4">
+                  <p className="text-gray-500 dark:text-gray-400 italic text-sm animate-pulse">
+                    &larr; Swipe to explore &rarr;
+                  </p>
+               </div>
             </div>
-            <div className="flex items-center text-gray-500 dark:text-gray-400">
-              <MapPin className="w-4 h-4 mr-1" />
-              <span>{data.data.location.city}, {data.data.location.region}</span>
-            </div>
-             <p className="text-gray-600 dark:text-gray-300 italic">"Swipe right to view my journey"</p>
           </div>
         );
 
@@ -103,8 +121,8 @@ export default function Card({ data, onSwipe, index }: CardProps) {
         const project = data.data;
         return (
           <div className="flex flex-col h-full">
-            <div className="h-48 bg-gray-200 dark:bg-gray-800 relative">
-               <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+            <div className="h-48 bg-gray-200 dark:bg-gray-800 relative shrink-0">
+               <img src={project.image} alt={project.name} className="w-full h-full object-cover" draggable={false} />
                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                  <h2 className="text-2xl font-bold text-white">{project.name}</h2>
                </div>
@@ -192,11 +210,12 @@ export default function Card({ data, onSwipe, index }: CardProps) {
         zIndex,
         scale,
         opacity: isFront ? opacity : opacityVal,
-        touchAction: 'none', // Critical for mobile swipes to not trigger scroll
+        touchAction: 'pan-y', // Allow vertical scroll, but let Framer handle horizontal
       }}
       animate={controls}
       drag={isFront ? 'x' : false}
       dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.7}
       onDragEnd={handleDragEnd}
       className={`absolute top-0 left-0 w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 origin-bottom
          ${isFront ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none'}`}

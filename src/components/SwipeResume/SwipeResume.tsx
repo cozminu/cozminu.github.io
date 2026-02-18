@@ -14,7 +14,7 @@ const resumeData = profileData as unknown as ResumeData;
 export default function SwipeResume() {
   const cards = useMemo(() => transformResumeToCards(resumeData), []);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0); // Keeping for potential future use
   const [history, setHistory] = useState<{ index: number; action: 'left' | 'right' }[]>([]);
 
   const handleSwipe = useCallback((id: string, direction: 'left' | 'right') => {
@@ -22,9 +22,9 @@ export default function SwipeResume() {
     setHistory(prev => [...prev, { index: currentIndex, action: direction }]);
 
     // Update score (simple logic: right swipe = interest)
-    if (direction === 'right') {
-      setScore(prev => prev + 10);
-    }
+    // if (direction === 'right') {
+    //   setScore(prev => prev + 10);
+    // }
 
     // Advance to next card
     setCurrentIndex(prev => prev + 1);
@@ -38,14 +38,14 @@ export default function SwipeResume() {
     setCurrentIndex(lastAction.index);
 
     if (lastAction.action === 'right') {
-      setScore(prev => prev - 10);
+      // setScore(prev => prev - 10);
     }
   }, [history]);
 
   // Restart handler
   const handleRestart = () => {
     setCurrentIndex(0);
-    setScore(0);
+    // setScore(0);
     setHistory([]);
   };
 

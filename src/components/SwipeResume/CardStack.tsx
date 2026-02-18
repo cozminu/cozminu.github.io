@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Card from './Card';
 import { CardData } from '../../types/resume';
