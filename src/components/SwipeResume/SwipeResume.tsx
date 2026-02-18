@@ -49,7 +49,7 @@ export default function SwipeResume() {
     setHistory([]);
   };
 
-  const isFinished = currentIndex + 1 >= cards.length;
+  const isFinished = currentIndex >= cards.length;
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-black flex flex-col items-center justify-center p-4 overflow-hidden relative transition-colors duration-300">
@@ -92,7 +92,9 @@ export default function SwipeResume() {
             <CardStack
               cards={cards}
               currentIndex={currentIndex}
-              onSwipe={isFinished ? handleRestart : handleSwipe}
+              onSwipe={handleSwipe}
+              score={score}
+              onRestart={handleRestart}
             />
           )}
         </div>

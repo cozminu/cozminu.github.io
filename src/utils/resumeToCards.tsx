@@ -1,6 +1,4 @@
 import { ResumeData, CardData } from '../types/resume';
-import { Mail, Linkedin, Github, FileText } from 'lucide-react';
-import React from 'react';
 
 export function transformResumeToCards(data: ResumeData): CardData[] {
   const cards: CardData[] = [];
@@ -49,37 +47,6 @@ export function transformResumeToCards(data: ResumeData): CardData[] {
     type: 'SKILLS',
     title: 'Skills',
     data: data.skills,
-  });
-
-  // 6. Match Card (Final)
-  cards.push({
-    id: 'match',
-    type: 'MATCH',
-    title: "It's a Match!",
-    data: {
-      links: [
-        {
-          name: 'Email',
-          url: `mailto:${data.basics.email}`,
-          icon: <Mail className="w-6 h-6 text-red-500" />,
-        },
-        {
-          name: 'LinkedIn',
-          url: data.basics.profiles.find(p => p.network === 'LinkedIn')?.url || '#',
-          icon: <Linkedin className="w-6 h-6 text-blue-600" />,
-        },
-        {
-          name: 'GitHub',
-          url: data.basics.profiles.find(p => p.network === 'GitHub')?.url || '#',
-          icon: <Github className="w-6 h-6 text-gray-800 dark:text-white" />,
-        },
-        {
-          name: 'Resume',
-          url: '/Profile.pdf', // Assuming PDF is at root
-          icon: <FileText className="w-6 h-6 text-indigo-600" />,
-        }
-      ]
-    },
   });
 
   return cards;

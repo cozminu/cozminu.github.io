@@ -8,9 +8,11 @@ interface CardProps {
   data: CardData;
   onSwipe: (direction: 'left' | 'right') => void;
   index: number; // 0 = front, 1 = second, etc.
+  score?: number;
+  onRestart?: () => void;
 }
 
-export default function Card({ data, onSwipe, index }: CardProps) {
+export default function Card({ data, onSwipe, index, score, onRestart }: CardProps) {
   const x = useMotionValue(0);
   const controls = useAnimation();
   const isFront = index === 0;
@@ -49,34 +51,34 @@ export default function Card({ data, onSwipe, index }: CardProps) {
       case 'INTRO':
         return (
           <div className="flex flex-col h-full bg-white dark:bg-zinc-900" draggable={false}>
-             {/* Top Half: Image */}
+            {/* Top Half: Image */}
             <div className="h-6/10 w-full relative shrink-0">
-               <img
-                 src={isDark ? 'profile_dark.jpg' : 'profile.jpg'}
-                 alt={data.data.name}
-                 className="w-full h-full object-cover"
-                 draggable={false} // Prevent image drag interfering with card drag
-               />
-               {false && <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4 md:hidden">
-                  {/* Mobile overlay text if needed */}
-               </div>}
+              <img
+                src={isDark ? 'profile_dark.jpg' : 'profile.jpg'}
+                alt={data.data.name}
+                className="w-full h-full object-cover"
+                draggable={false} // Prevent image drag interfering with card drag
+              />
+              {false && <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4 md:hidden">
+                {/* Mobile overlay text if needed */}
+              </div>}
             </div>
 
             {/* Bottom Half: Content */}
             <div className="h-auto flex flex-col items-center justify-center p-6 text-center space-y-4">
-               <div>
-                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{data.data.name}</h1>
-                  <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium">{data.data.label}</p>
-               </div>
-               <div className="flex items-center text-gray-500 dark:text-gray-400">
-                  <MapPin className="w-4 h-4 mr-1" />
-                  <span>{data.data.location.city}, {data.data.location.region}</span>
-               </div>
-               <div className="flex">
-                  <p className="text-gray-500 dark:text-gray-400 italic text-sm animate-pulse">
-                    &larr; Swipe to explore &rarr;
-                  </p>
-               </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{data.data.name}</h1>
+                <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium">{data.data.label}</p>
+              </div>
+              <div className="flex items-center text-gray-500 dark:text-gray-400">
+                <MapPin className="w-4 h-4 mr-1" />
+                <span>{data.data.location.city}, {data.data.location.region}</span>
+              </div>
+              <div className="flex">
+                <p className="text-gray-500 dark:text-gray-400 italic text-sm animate-pulse">
+                  &larr; Swipe to explore &rarr;
+                </p>
+              </div>
             </div>
           </div>
         );
@@ -106,14 +108,14 @@ export default function Card({ data, onSwipe, index }: CardProps) {
               </div>
             </div>
 
-             <ul className="space-y-3">
-               {job.highlights.map((highlight: string, i: number) => (
-                 <li key={i} className="flex items-start text-gray-700 dark:text-gray-300 text-sm">
-                    <span className="mr-2 text-indigo-500 mt-1">•</span>
-                    {highlight}
-                 </li>
-               ))}
-             </ul>
+            <ul className="space-y-3">
+              {job.highlights.map((highlight: string, i: number) => (
+                <li key={i} className="flex items-start text-gray-700 dark:text-gray-300 text-sm">
+                  <span className="mr-2 text-indigo-500 mt-1">•</span>
+                  {highlight}
+                </li>
+              ))}
+            </ul>
           </div>
         );
 
@@ -122,10 +124,10 @@ export default function Card({ data, onSwipe, index }: CardProps) {
         return (
           <div className="flex flex-col h-full">
             <div className="h-48 bg-gray-200 dark:bg-gray-800 relative shrink-0">
-               <img src={project.image} alt={project.name} className="w-full h-full object-cover" draggable={false} />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                 <h2 className="text-2xl font-bold text-white">{project.name}</h2>
-               </div>
+              <img src={project.image} alt={project.name} className="w-full h-full object-cover" draggable={false} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                <h2 className="text-2xl font-bold text-white">{project.name}</h2>
+              </div>
             </div>
             <div className="p-6 flex-1">
               <p className="text-gray-700 dark:text-gray-300 mb-4">{project.description}</p>
@@ -138,12 +140,12 @@ export default function Card({ data, onSwipe, index }: CardProps) {
               </div>
 
               <div className="space-y-2">
-                 {project.highlights.map((h: string, i: number) => (
-                   <div key={i} className="flex items-center text-xs text-gray-500 dark:text-gray-400">
-                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
-                     {h}
-                   </div>
-                 ))}
+                {project.highlights.map((h: string, i: number) => (
+                  <div key={i} className="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
+                    {h}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -151,49 +153,17 @@ export default function Card({ data, onSwipe, index }: CardProps) {
 
       case 'SKILLS':
         return (
-           <div className="flex flex-col h-full p-6">
-             <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">Skills</h2>
-             <div className="flex flex-wrap gap-2">
-               {data.data.map((skill: any) => (
-                 <div key={skill.name} className="flex flex-col items-center p-3 bg-gray-50 dark:bg-zinc-800 rounded-lg grow shadow-sm">
-                    <span className="font-bold text-gray-800 dark:text-gray-200">{skill.name}</span>
-                    <span className="text-xs text-indigo-500">{skill.level}</span>
-                 </div>
-               ))}
-             </div>
-           </div>
-        );
-
-      case 'MATCH':
-        return (
-           <div className="flex flex-col items-center justify-center h-full p-6 text-center space-y-8 bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
-             <div>
-               <h1 className="text-4xl font-extrabold mb-2">It's a Match!</h1>
-               <p className="text-indigo-100">You seem interested. Let's connect.</p>
-             </div>
-
-             <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
-                {data.data.links.map((link: any) => (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center justify-center p-4 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-colors"
-                  >
-                    {link.icon}
-                    <span className="mt-2 font-medium text-sm">{link.name}</span>
-                  </a>
-                ))}
-             </div>
-
-             <button
-                onClick={() => window.open('/Profile.pdf', '_blank')}
-                className="px-8 py-3 bg-white text-indigo-600 rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
-             >
-               Download Resume
-             </button>
-           </div>
+          <div className="flex flex-col h-full p-6">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">Skills</h2>
+            <div className="flex flex-wrap gap-2">
+              {data.data.map((skill: any) => (
+                <div key={skill.name} className="flex flex-col items-center p-3 bg-gray-50 dark:bg-zinc-800 rounded-lg grow shadow-sm">
+                  <span className="font-bold text-gray-800 dark:text-gray-200">{skill.name}</span>
+                  <span className="text-xs text-indigo-500">{skill.level}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         );
 
       default:
