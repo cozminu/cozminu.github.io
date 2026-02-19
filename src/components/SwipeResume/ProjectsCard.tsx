@@ -1,6 +1,5 @@
 import React from 'react';
-import { ExternalLink, Github, Code2, ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ExternalLink, Code2, ArrowUpRight } from 'lucide-react';
 
 interface ProjectsCardProps {
   data: {

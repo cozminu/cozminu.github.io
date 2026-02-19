@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, Bug, Code2, RefreshCcw, Terminal } from 'lucide-react';
+import { Bug, Code2, RefreshCcw, Terminal } from 'lucide-react';
 
 interface MatchResultFailProps {
   onRestart?: () => void;

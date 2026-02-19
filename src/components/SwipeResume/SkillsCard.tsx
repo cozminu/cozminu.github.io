@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, Globe, Layout, Server, Terminal, Database, Cloud, Code } from 'lucide-react';
+import { Cpu, Layout, Server, Terminal, Database, Cloud, Code } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface SkillCategory {

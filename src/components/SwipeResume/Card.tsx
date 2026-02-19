@@ -1,7 +1,6 @@
 import React, { useContext, useImperativeHandle, forwardRef } from 'react';
 import { motion, useMotionValue, useTransform, useAnimation, PanInfo } from 'framer-motion';
 import { CardData } from '../../types/resume';
-import { Calendar, Building } from 'lucide-react';
 import { ThemeContext } from '../../context/ThemeContext';
 import AboutCard from './AboutCard';
 import SkillsCard from './SkillsCard';

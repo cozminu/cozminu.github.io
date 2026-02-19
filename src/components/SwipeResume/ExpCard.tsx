@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Building, Briefcase, ArrowUpRight } from 'lucide-react';
+import { Calendar, Building, Briefcase } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface ExpCardProps {
