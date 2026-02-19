@@ -19,7 +19,7 @@ export default function Controls({ onVote, onUndo, canUndo, disabled }: Controls
       } else if (e.key === 'ArrowRight') {
         onVote('right');
       } else if (e.key === 'Backspace' && canUndo) {
-         onUndo();
+        onUndo();
       }
     };
 
@@ -34,8 +34,8 @@ export default function Controls({ onVote, onUndo, canUndo, disabled }: Controls
         whileTap={{ scale: 0.9 }}
         onClick={onUndo}
         disabled={!canUndo || disabled}
-        className={`p-4 rounded-full bg-white dark:bg-zinc-800 shadow-lg border border-gray-200 dark:border-zinc-700 transition-colors
-          ${!canUndo || disabled ? 'opacity-50 cursor-not-allowed text-gray-400' : 'text-yellow-500 hover:text-yellow-600'}`}
+        className={`p-4 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/20 dark:border-white/10 transition-colors
+          ${!canUndo || disabled ? 'opacity-50 cursor-not-allowed text-gray-400' : 'text-yellow-500 hover:text-yellow-600 hover:bg-white/60 dark:hover:bg-white/20'}`}
         aria-label="Undo"
       >
         <RotateCcw className="w-6 h-6" />
@@ -46,8 +46,8 @@ export default function Controls({ onVote, onUndo, canUndo, disabled }: Controls
         whileTap={{ scale: 0.9 }}
         onClick={() => onVote('left')}
         disabled={disabled}
-        className={`p-5 rounded-full bg-white dark:bg-zinc-800 shadow-xl border border-gray-200 dark:border-zinc-700 transition-colors
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'text-red-500 hover:text-red-600'}`}
+        className={`p-5 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md shadow-xl border border-white/20 dark:border-white/10 transition-colors
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'text-red-500 hover:text-red-600 hover:bg-white/60 dark:hover:bg-white/20'}`}
         aria-label="Pass"
       >
         <X className="w-8 h-8" />
@@ -58,8 +58,8 @@ export default function Controls({ onVote, onUndo, canUndo, disabled }: Controls
         whileTap={{ scale: 0.9 }}
         onClick={() => onVote('right')}
         disabled={disabled}
-        className={`p-5 rounded-full bg-white dark:bg-zinc-800 shadow-xl border border-gray-200 dark:border-zinc-700 transition-colors
-           ${disabled ? 'opacity-50 cursor-not-allowed' : 'text-green-500 hover:text-green-600'}`}
+        className={`p-5 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md shadow-xl border border-white/20 dark:border-white/10 transition-colors
+           ${disabled ? 'opacity-50 cursor-not-allowed' : 'text-green-500 hover:text-green-600 hover:bg-white/60 dark:hover:bg-white/20'}`}
         aria-label="Like"
       >
         <Heart className="w-8 h-8 fill-current" />

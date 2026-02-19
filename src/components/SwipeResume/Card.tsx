@@ -50,7 +50,7 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
     switch (data.type) {
       case 'INTRO':
         return (
-          <div className="flex flex-col h-full bg-white dark:bg-zinc-900" draggable={false}>
+          <div className="flex flex-col h-full bg-white/30 dark:bg-black/30 backdrop-blur-md" draggable={false}>
             {/* Top Half: Image */}
             <div className="h-6/10 w-full relative shrink-0">
               <img
@@ -125,7 +125,7 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
               <div className="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-800">
                 <div className="flex flex-wrap gap-2">
                   {job.technologies.map((tech: string) => (
-                    <span key={tech} className="px-2 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-xs rounded-md font-medium border border-indigo-100 dark:border-indigo-800/50">
+                    <span key={tech} className="px-2 py-1 bg-white/40 dark:bg-white/10 text-indigo-700 dark:text-indigo-300 text-xs rounded-md font-medium border border-white/20 dark:border-white/10 shadow-sm">
                       {tech}
                     </span>
                   ))}
@@ -161,7 +161,7 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
               <div className="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-800">
                 <div className="flex flex-wrap gap-2">
                   {project.keywords.map((tech: string) => (
-                    <span key={tech} className="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 text-xs rounded font-medium">
+                    <span key={tech} className="px-2 py-1 bg-white/40 dark:bg-white/10 text-indigo-700 dark:text-indigo-300 text-xs rounded font-medium border border-white/20 dark:border-white/10 shadow-sm">
                       {tech}
                     </span>
                   ))}
@@ -177,7 +177,7 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
             <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">Skills</h2>
             <div className="flex flex-wrap gap-2">
               {data.data.map((skill: any) => (
-                <div key={skill.name} className="flex flex-col items-center px-3 py-2 bg-white dark:bg-zinc-800 rounded-lg grow shadow-sm border border-gray-100 dark:border-zinc-700">
+                <div key={skill.name} className="flex flex-col items-center px-3 py-2 bg-white/40 dark:bg-white/5 rounded-lg grow shadow-sm border border-white/20 dark:border-white/10 backdrop-blur-sm">
                   <span className="font-bold text-gray-800 dark:text-gray-200">{skill.name}</span>
                   <span className="text-xs text-indigo-500 font-medium">{skill.level}</span>
                 </div>
@@ -209,7 +209,7 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.7}
       onDragEnd={handleDragEnd}
-      className={`absolute top-0 left-0 w-full h-full bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 origin-bottom select-none
+      className={`absolute top-0 left-0 w-full h-full bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/50 dark:border-white/10 origin-bottom select-none
          ${isFront ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none'}`}
     >
       {/* Swipe Feedback Overlays */}

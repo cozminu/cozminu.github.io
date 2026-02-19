@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Github, Linkedin, Mail } from 'lucide-react';
+import { FileText, Github, Linkedin, Mail, RotateCcw } from 'lucide-react';
 import profileData from '../../data/profile.json';
 import { ResumeData } from '../../types/resume';
 
@@ -59,7 +59,7 @@ export default function MatchResult({ score, onRestart }: MatchResultProps) {
         <h1 className="text-4xl font-extrabold mb-2">It's a Match!</h1>
         <p className="text-indigo-100">You seem interested. Let's connect.</p>
       </div>
-      <div className="h-2/3 flex items-start justify-center p-6">
+      <div className="h-2/3 flex flex-col items-center justify-between p-6">
         <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
           {links.map((link: any) => (
             <a
@@ -74,6 +74,15 @@ export default function MatchResult({ score, onRestart }: MatchResultProps) {
             </a>
           ))}
         </div>
+
+        {/* Reset Button - No text, no borders */}
+        <button
+          onClick={onRestart}
+          className="mt-4 p-3 text-white/70 hover:text-white transition-colors focus:outline-none"
+          aria-label="Reset"
+        >
+          <RotateCcw className="w-8 h-8" />
+        </button>
       </div>
     </div>
   );
