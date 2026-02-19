@@ -1,7 +1,7 @@
 import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Card, { CardRef } from './Card';
-import { CardData } from '../../types/resume';
+import { CardData, ResumeData } from '../types/resume';
 import MatchResult from './MatchResult';
 
 interface CardStackProps {
@@ -11,13 +11,14 @@ interface CardStackProps {
   positiveSwipes?: number;
   totalSwipes?: number;
   onRestart?: () => void;
+  profileData: ResumeData;
 }
 
 export interface CardStackRef {
   swipe: (direction: 'left' | 'right') => Promise<void>;
 }
 
-const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, currentIndex, positiveSwipes, totalSwipes, onRestart }, ref) => {
+const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, currentIndex, positiveSwipes, totalSwipes, onRestart, profileData }, ref) => {
   // We show up to 3 cards for stack effect
   const visibleCards = cards.slice(currentIndex, currentIndex + 3).reverse();
   const cardRefs = useRef<Record<string, CardRef | null>>({});
@@ -67,7 +68,7 @@ const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, cu
       </AnimatePresence>
 
       {currentIndex >= cards.length && (
-        <MatchResult positiveSwipes={positiveSwipes} totalSwipes={totalSwipes} onRestart={onRestart} />
+        <MatchResult positiveSwipes={positiveSwipes} totalSwipes={totalSwipes} onRestart={onRestart} profileData={profileData} />
       )}
     </div>
   );

@@ -1,14 +1,14 @@
 import React from 'react';
 import { CheckCircle, Code2, Rocket, Share2, Terminal, Zap } from 'lucide-react';
-import profileData from '../../data/profile.json';
-import { ResumeData } from '../../types/resume';
+import { ResumeData } from '../types/resume';
 
 interface MatchResultSuccessProps {
   onRestart?: () => void;
+  profileData: ResumeData;
 }
 
-export default function MatchResultSuccess({ onRestart }: MatchResultSuccessProps) {
-  const data = profileData as unknown as ResumeData;
+export default function MatchResultSuccess({ onRestart, profileData }: MatchResultSuccessProps) {
+  const data = profileData;
   const links = [
     {
       name: 'Email',

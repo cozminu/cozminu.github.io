@@ -2,10 +2,10 @@ import React, { useState, useMemo, useCallback, useRef } from 'react';
 import CardStack, { CardStackRef } from './CardStack';
 import Controls from './Controls';
 import ProgressBar from './ProgressBar';
-import profileData from '../../data/profile.json';
-import { transformResumeToCards } from '../../utils/resumeToCards';
-import { ResumeData } from '../../types/resume';
-import ThemeToggle from '../ThemeToggle'; // Adjust path if needed
+import profileData from '../data/profile.json';
+import { transformResumeToCards } from '../utils/resumeToCards';
+import { ResumeData } from '../types/resume';
+import ThemeToggle from './ThemeToggle'; // Adjust path if needed
 import { motion } from 'framer-motion';
 
 // Cast JSON to ResumeData to ensure types
@@ -102,6 +102,7 @@ export default function SwipeResume() {
               positiveSwipes={isSuperLiked ? cards.length : history.filter(h => h.action === 'right').length}
               totalSwipes={isSuperLiked ? cards.length : history.length}
               onRestart={handleRestart}
+              profileData={resumeData}
             />
           )}
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { ThemeProvider } from "./context/ThemeContext";
-import SwipeResume from "./components/SwipeResume/SwipeResume";
+import SwipeResume from "./components/SwipeResume";
 
 function App() {
   return (
