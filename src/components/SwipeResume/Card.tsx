@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useImperativeHandle, forwardRef } from 'react';
 import { motion, useMotionValue, useTransform, useAnimation, PanInfo } from 'framer-motion';
 import { CardData } from '../../types/resume';
 import { MapPin, Calendar, Building } from 'lucide-react';
@@ -12,12 +12,24 @@ interface CardProps {
   onRestart?: () => void;
 }
 
-export default function Card({ data, onSwipe, index, score, onRestart }: CardProps) {
+export interface CardRef {
+  triggerSwipe: (direction: 'left' | 'right') => Promise<void>;
+}
+
+const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRestart }, ref) => {
   const x = useMotionValue(0);
   const controls = useAnimation();
   const isFront = index === 0;
   const { theme } = useContext(ThemeContext);
   const isDark = theme === 'dark';
+
+  useImperativeHandle(ref, () => ({
+    triggerSwipe: async (direction: 'left' | 'right') => {
+      const targetX = direction === 'right' ? 500 : -500;
+      await controls.start({ x: targetX, opacity: 0, transition: { duration: 0.4 } });
+      onSwipe(direction);
+    }
+  }));
 
   // Visual stacking logic
   const scale = 1 - index * 0.05;
@@ -36,10 +48,10 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
   const handleDragEnd = async (event: any, info: PanInfo) => {
     const threshold = 100;
     if (info.offset.x > threshold) {
-      await controls.start({ x: 500, opacity: 0, transition: { duration: 0.2 } });
+      await controls.start({ x: 500, opacity: 0, transition: { duration: 0.4 } });
       onSwipe('right');
     } else if (info.offset.x < -threshold) {
-      await controls.start({ x: -500, opacity: 0, transition: { duration: 0.2 } });
+      await controls.start({ x: -500, opacity: 0, transition: { duration: 0.4 } });
       onSwipe('left');
     } else {
       controls.start({ x: 0, rotate: 0, transition: { type: 'spring', stiffness: 500, damping: 50 } });
@@ -233,4 +245,6 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
       {renderContent()}
     </motion.div>
   );
-}
+});
+
+export default Card;

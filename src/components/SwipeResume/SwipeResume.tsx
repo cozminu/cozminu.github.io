@@ -1,5 +1,5 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import CardStack from './CardStack';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
+import CardStack, { CardStackRef } from './CardStack';
 import Controls from './Controls';
 import ProgressBar from './ProgressBar';
 import profileData from '../../data/profile.json';
@@ -16,6 +16,8 @@ export default function SwipeResume() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0); // Keeping for potential future use
   const [history, setHistory] = useState<{ index: number; action: 'left' | 'right' }[]>([]);
+  const cardStackRef = useRef<CardStackRef>(null);
+  const [isSwiping, setIsSwiping] = useState(false);
 
   const handleSwipe = useCallback((id: string, direction: 'left' | 'right') => {
     // Add to history for undo
@@ -30,8 +32,16 @@ export default function SwipeResume() {
     setCurrentIndex(prev => prev + 1);
   }, [currentIndex]);
 
+  const handleVote = useCallback(async (direction: 'left' | 'right') => {
+    if (isSwiping || !cardStackRef.current) return;
+
+    setIsSwiping(true);
+    await cardStackRef.current.swipe(direction);
+    setIsSwiping(false);
+  }, [isSwiping]);
+
   const handleUndo = useCallback(() => {
-    if (history.length === 0) return;
+    if (history.length === 0 || isSwiping) return;
 
     const lastAction = history[history.length - 1];
     setHistory(prev => prev.slice(0, -1));
@@ -40,7 +50,7 @@ export default function SwipeResume() {
     if (lastAction.action === 'right') {
       setScore(prev => prev - 10);
     }
-  }, [history]);
+  }, [history, isSwiping]);
 
   // Restart handler
   const handleRestart = () => {
@@ -90,6 +100,7 @@ export default function SwipeResume() {
             </motion.div>
           ) : (
             <CardStack
+              ref={cardStackRef}
               cards={cards}
               currentIndex={currentIndex}
               onSwipe={handleSwipe}
@@ -101,10 +112,10 @@ export default function SwipeResume() {
 
         {!isFinished && (
           <Controls
-            onVote={(dir) => handleSwipe(cards[currentIndex].id, dir)}
+            onVote={handleVote}
             onUndo={handleUndo}
             canUndo={history.length > 0}
-            disabled={isFinished}
+            disabled={isFinished || isSwiping}
           />
         )}
       </div>

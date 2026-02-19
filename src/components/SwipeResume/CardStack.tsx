@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Card from './Card';
+import Card, { CardRef } from './Card';
 import { CardData } from '../../types/resume';
 import MatchResult from './MatchResult';
 
@@ -12,9 +12,25 @@ interface CardStackProps {
   onRestart?: () => void;
 }
 
-export default function CardStack({ cards, onSwipe, currentIndex, score, onRestart }: CardStackProps) {
+export interface CardStackRef {
+  swipe: (direction: 'left' | 'right') => Promise<void>;
+}
+
+const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, currentIndex, score, onRestart }, ref) => {
   // We show up to 3 cards for stack effect
   const visibleCards = cards.slice(currentIndex, currentIndex + 3).reverse();
+  const cardRefs = useRef<Record<string, CardRef | null>>({});
+
+  useImperativeHandle(ref, () => ({
+    swipe: async (direction: 'left' | 'right') => {
+      const activeCardId = cards[currentIndex]?.id;
+      const activeCardRef = activeCardId ? cardRefs.current[activeCardId] : null;
+
+      if (activeCardRef) {
+        await activeCardRef.triggerSwipe(direction);
+      }
+    }
+  }), [cards, currentIndex]);
 
   return (
     <div className="relative w-full max-w-sm h-[600px] sm:h-[700px] perspective-1000">
@@ -33,6 +49,13 @@ export default function CardStack({ cards, onSwipe, currentIndex, score, onResta
           return (
             <Card
               key={card.id}
+              ref={(el) => {
+                if (el) {
+                  cardRefs.current[card.id] = el;
+                } else {
+                  delete cardRefs.current[card.id];
+                }
+              }}
               data={card}
               onSwipe={(dir) => onSwipe(card.id, dir)}
               index={stackIndex}
@@ -48,4 +71,6 @@ export default function CardStack({ cards, onSwipe, currentIndex, score, onResta
       )}
     </div>
   );
-}
+});
+
+export default CardStack;
