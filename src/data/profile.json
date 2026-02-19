@@ -1,12 +1,12 @@
 {
   "basics": {
-    "name": "Cozmin Ungureanu",
-    "label": "Senior Backend Engineer",
+    "name": "Cozmin",
+    "label": "Senior Software Engineer",
     "image": "profile.jpg",
     "email": "ucozmin@gmail.com",
     "phone": "",
     "url": "https://cozminu.github.io",
-    "summary": "Senior Backend Engineer (10+ years) specializing in scalable API platforms and system integrations handling 200K+ data loads and 1M+ daily requests. Expert in TypeScript, NestJS, and Distributed Systems.",
+    "summary": "Senior Software Engineer (10+ years) specializing in scalable API platforms and system integrations handling 200K+ data loads and 1M+ daily requests. Expert in TypeScript, NestJS, and Distributed Systems.",
     "location": {
       "address": "",
       "postalCode": "",
@@ -26,7 +26,6 @@
         "url": "https://github.com/cozminu"
       }
     ],
-    "tagline": "Building scalable APIs and high-throughput systems.",
     "experience": "10+ Years Exp.",
     "langs": ["TypeScript", "C#", "PHP", "SQL", "React"]
   },

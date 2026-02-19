@@ -62,34 +62,34 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
     switch (data.type) {
       case 'INTRO':
         return (
-          <div className="flex flex-col h-full bg-white/30 dark:bg-black/30 backdrop-blur-md" draggable={false}>
-            {/* Top Half: Image */}
-            <div className="h-1/2 w-full relative shrink-0">
+          <div className="flex flex-col h-full bg-black relative overflow-hidden rounded-3xl" draggable={false}>
+            {/* Full Background Image */}
+            <div className="absolute inset-0 w-full h-full">
               <img
                 src={isDark ? 'profile_dark.jpg' : 'profile.jpg'}
                 alt={data.data.name}
                 className="w-full h-full object-cover"
                 draggable={false}
               />
+              {/* Gradient Overlay for Text Readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
             </div>
 
-            {/* Bottom Half: Content */}
-            <div className="h-1/2 flex flex-col p-6 text-left relative">
-              {/* Experience Badge */}
-              <div className="absolute top-6 right-6 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                {data.data.experience}
-              </div>
-
-              <div className="mt-2">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{data.data.name}</h1>
-                <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium mb-4">{data.data.label}</p>
+            {/* Content Overlay */}
+            <div className="relative z-10 flex flex-col h-full p-8 text-white text-left">
+              <div className="mt-auto mb-8">
+                {/* Name & Title */}
+                <h1 className="text-4xl font-extrabold mb-2 tracking-tight">{data.data.name}</h1>
+                <div className="flex flex-col gap-1 mb-4">
+                  <p className="text-xl text-indigo-300 font-semibold">{data.data.label}</p>
+                  <p className="text-gray-400 font-medium text-sm">{data.data.experience}</p>
+                </div>
 
                 {/* Languages */}
-                <div className="mt-auto">
-                  <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">I speak</p>
+                <div>
                   <div className="flex flex-wrap gap-2">
                     {data.data.langs.map((lang: string) => (
-                      <span key={lang} className="px-2 py-1 bg-white/50 dark:bg-white/10 text-gray-800 dark:text-gray-200 text-xs rounded-md font-medium border border-gray-200 dark:border-gray-700">
+                      <span key={lang} className="px-3 py-1.5 bg-white/10 text-white text-xs rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-colors">
                         {lang}
                       </span>
                     ))}
@@ -97,8 +97,8 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
                 </div>
               </div>
 
-              <div className="mt-auto pt-4 flex justify-center">
-                <p className="text-gray-400 dark:text-gray-500 italic text-xs animate-pulse">
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center opacity-70">
+                <p className="text-gray-400 italic text-xs animate-pulse">
                   &larr; Swipe to explore &rarr;
                 </p>
               </div>
