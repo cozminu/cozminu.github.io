@@ -57,7 +57,7 @@ export default function SwipeResume() {
   const isFinished = currentIndex >= cards.length;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 overflow-hidden relative transition-colors duration-300">
+    <div className="min-h-screen min-h-[100dvh] flex flex-col items-center justify-center p-4 overflow-hidden relative transition-colors duration-300">
 
       {/* Background decoration */}
       <div className="absolute inset-0 z-0 opacity-20 dark:opacity-10 pointer-events-none">
