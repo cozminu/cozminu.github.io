@@ -1,7 +1,7 @@
 import React, { useContext, useImperativeHandle, forwardRef } from 'react';
 import { motion, useMotionValue, useTransform, useAnimation, PanInfo } from 'framer-motion';
 import { CardData } from '../../types/resume';
-import { MapPin, Calendar, Building } from 'lucide-react';
+import { Calendar, Building } from 'lucide-react';
 import { ThemeContext } from '../../context/ThemeContext';
 
 interface CardProps {
@@ -64,30 +64,41 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
         return (
           <div className="flex flex-col h-full bg-white/30 dark:bg-black/30 backdrop-blur-md" draggable={false}>
             {/* Top Half: Image */}
-            <div className="h-6/10 w-full relative shrink-0">
+            <div className="h-1/2 w-full relative shrink-0">
               <img
                 src={isDark ? 'profile_dark.jpg' : 'profile.jpg'}
                 alt={data.data.name}
                 className="w-full h-full object-cover"
-                draggable={false} // Prevent image drag interfering with card drag
+                draggable={false}
               />
-              {false && <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4 md:hidden">
-                {/* Mobile overlay text if needed */}
-              </div>}
             </div>
 
             {/* Bottom Half: Content */}
-            <div className="h-auto flex flex-col items-center justify-center p-6 text-center space-y-4">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{data.data.name}</h1>
-                <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium">{data.data.label}</p>
+            <div className="h-1/2 flex flex-col p-6 text-left relative">
+              {/* Experience Badge */}
+              <div className="absolute top-6 right-6 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                {data.data.experience}
               </div>
-              <div className="flex items-center text-gray-500 dark:text-gray-400">
-                <MapPin className="w-4 h-4 mr-1" />
-                <span>{data.data.location.city}, {data.data.location.region}</span>
+
+              <div className="mt-2">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{data.data.name}</h1>
+                <p className="text-lg text-indigo-600 dark:text-indigo-400 font-medium mb-4">{data.data.label}</p>
+
+                {/* Languages */}
+                <div className="mt-auto">
+                  <p className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">I speak</p>
+                  <div className="flex flex-wrap gap-2">
+                    {data.data.langs.map((lang: string) => (
+                      <span key={lang} className="px-2 py-1 bg-white/50 dark:bg-white/10 text-gray-800 dark:text-gray-200 text-xs rounded-md font-medium border border-gray-200 dark:border-gray-700">
+                        {lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div className="flex">
-                <p className="text-gray-500 dark:text-gray-400 italic text-sm animate-pulse">
+
+              <div className="mt-auto pt-4 flex justify-center">
+                <p className="text-gray-400 dark:text-gray-500 italic text-xs animate-pulse">
                   &larr; Swipe to explore &rarr;
                 </p>
               </div>
@@ -186,12 +197,18 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
       case 'SKILLS':
         return (
           <div className="flex flex-col h-full p-6 overflow-y-auto custom-scrollbar">
-            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">Skills</h2>
-            <div className="flex flex-wrap gap-2">
-              {data.data.map((skill: any) => (
-                <div key={skill.name} className="flex flex-col items-center px-3 py-2 bg-white/40 dark:bg-white/5 rounded-lg grow shadow-sm border border-white/20 dark:border-white/10 backdrop-blur-sm">
-                  <span className="font-bold text-gray-800 dark:text-gray-200">{skill.name}</span>
-                  <span className="text-xs text-indigo-500 font-medium">{skill.level}</span>
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">Technical Depth</h2>
+            <div className="space-y-6">
+              {data.data.map((category: any) => (
+                <div key={category.category}>
+                  <h3 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400 mb-2">{category.category}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {category.items.map((skill: string) => (
+                      <span key={skill} className="px-3 py-1 bg-white/40 dark:bg-white/5 text-gray-800 dark:text-gray-200 text-sm rounded-md font-medium border border-white/20 dark:border-white/10 shadow-sm backdrop-blur-sm">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>

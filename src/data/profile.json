@@ -1,12 +1,12 @@
 {
   "basics": {
     "name": "Cozmin Ungureanu",
-    "label": "Senior Software Developer",
+    "label": "Senior Backend Engineer",
     "image": "profile.jpg",
     "email": "ucozmin@gmail.com",
     "phone": "",
     "url": "https://cozminu.github.io",
-    "summary": "Senior Software Developer with 10+ years of experience in building scalable, high-performance applications across telecommunications, energy, and pharma industries. Proficient in TypeScript, NestJS, Node.js, PHP, and cloud services like Azure.",
+    "summary": "Senior Backend Engineer (10+ years) specializing in scalable API platforms and system integrations handling 200K+ data loads and 1M+ daily requests. Expert in TypeScript, NestJS, and Distributed Systems.",
     "location": {
       "address": "",
       "postalCode": "",
@@ -25,7 +25,10 @@
         "username": "cozminu",
         "url": "https://github.com/cozminu"
       }
-    ]
+    ],
+    "tagline": "Building scalable APIs and high-throughput systems.",
+    "experience": "10+ Years Exp.",
+    "langs": ["TypeScript", "C#", "PHP", "SQL", "React"]
   },
   "work": [
     {
@@ -49,11 +52,10 @@
       "endDate": "2025-01-01",
       "summary": "Remote",
       "highlights": [
-        "Designed and implemented key integrations for an AI-powered digital assistant, including custom APIs bridging legacy systems (.NET Core, C#, NestJS).",
-        "Built a NestJS chat API as a wrapper for ChatGPT for dynamic responses across enterprise systems.",
-        "Optimized large-data handling via concurrent calls, Azure Blob CSV uploads, and streaming (200K+ items).",
-        "Orchestrated NestJS cron workloads on Kubernetes for ServiceNow, Sailpoint, and Workday syncs.",
-        "Remediated WAST vulnerabilities to meet pharma-grade data security requirements."
+        "Built enterprise AI chat API wrapper (NestJS + ChatGPT) integrating ServiceNow, SailPoint, Workday",
+        "Processed 200K+ records via streaming & Azure Blob, reducing memory overhead",
+        "Designed custom .NET Core API to expose legacy system",
+        "Remediated pharma-grade security vulnerabilities (WAST compliance)"
       ],
       "technologies": ["NestJS", "TypeScript", ".NET Core", "C#", "Azure", "Kubernetes", "ChatGPT"]
     },
@@ -81,8 +83,8 @@
       "summary": "Galaţi, Romania",
       "highlights": [
         "Maintained a high‑performance REST API (PHP/CodeIgniter, MySQL, Memcached) serving 1M+ requests/day.",
-        "Built a background auth worker for concurrent logins, improving reliability and speed.",
-        "Advised an 8‑person team on performance, caching, and security best practices.",
+        "Acted as senior technical advisor within 8-person backend team",
+        "Guided API performance, caching strategy, and security decisions",
         "Developed internal tools (CRM on Joomla → Phalcon) and a customer web app (Bonfire)."
       ],
       "technologies": ["PHP", "CodeIgniter", "MySQL", "Memcached", "Joomla", "Phalcon"]
@@ -93,6 +95,7 @@
       "name": "AI Assistant Integration",
       "description": "Enterprise digital assistant with custom APIs, ChatGPT wrapper, and large-data streaming for pharma clients.",
       "highlights": [
+        "Led first version of chat API using ChatGPT",
         "200K+ items processed",
         "Pharma-grade security",
         "99.99% uptime"
@@ -128,49 +131,41 @@
   ],
   "skills": [
     {
-      "name": "TypeScript",
-      "level": "10+ years",
-      "keywords": ["Frontend", "Backend"]
+      "category": "Backend",
+      "items": [
+        "Node.js (NestJS)",
+        ".NET Core (C#)",
+        "PHP (CodeIgniter)",
+        "REST",
+        "Streaming APIs",
+        "System Integrations"
+      ]
     },
     {
-      "name": "NestJS",
-      "level": "5+ years",
-      "keywords": ["Backend", "Framework"]
+      "category": "Data",
+      "items": [
+        "PostgreSQL",
+        "MySQL",
+        "Redis",
+        "Memcached",
+        "Large dataset streaming (200K+ items)"
+      ]
     },
     {
-      "name": "Node.js",
-      "level": "10+ years",
-      "keywords": ["Backend", "Runtime"]
+      "category": "Infrastructure",
+      "items": [
+        "Azure (Blob Storage)",
+        "Kubernetes workloads",
+        "CI/CD environments"
+      ]
     },
     {
-      "name": "PostgreSQL",
-      "level": "6+ years",
-      "keywords": ["Database"]
-    },
-    {
-      "name": "Redis",
-      "level": "4 years",
-      "keywords": ["Cache"]
-    },
-    {
-      "name": "Azure",
-      "level": "3 years",
-      "keywords": ["Cloud"]
-    },
-    {
-      "name": "Kubernetes",
-      "level": "3 years",
-      "keywords": ["DevOps"]
-    },
-    {
-      "name": "PHP",
-      "level": "10+ years",
-      "keywords": ["Backend"]
-    },
-    {
-      "name": ".NET Core",
-      "level": "3 years",
-      "keywords": ["Backend"]
+      "category": "Performance",
+      "items": [
+        "Concurrency handling",
+        "Background workers",
+        "Caching strategies"
+      ]
     }
   ],
   "config": {
