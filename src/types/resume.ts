@@ -32,6 +32,7 @@ export interface Work {
   endDate: string;
   summary: string;
   highlights: string[];
+  technologies?: string[]; // Added technologies field
 }
 
 export interface Project {

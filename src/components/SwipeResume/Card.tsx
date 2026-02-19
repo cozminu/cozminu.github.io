@@ -95,8 +95,11 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
 
       case 'EXPERIENCE':
         const job = data.data;
+        const startYear = new Date(job.startDate).getFullYear();
+        const endYear = job.endDate ? new Date(job.endDate).getFullYear() : 'Present';
+
         return (
-          <div className="flex flex-col h-full p-6">
+          <div className="flex flex-col h-full p-6 relative">
             <div className="mb-4">
               <span className="text-xs font-bold tracking-wider text-indigo-500 uppercase">Experience</span>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{job.position}</h2>
@@ -104,11 +107,11 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
                 <Building className="w-4 h-4 mr-1" />
                 <span className="font-medium mr-3">{job.name}</span>
                 <Calendar className="w-4 h-4 mr-1" />
-                <span>{job.startDate} - {job.endDate || 'Present'}</span>
+                <span>{startYear} - {endYear}</span>
               </div>
             </div>
 
-            <ul className="space-y-3">
+            <ul className="space-y-3 flex-1 overflow-y-auto custom-scrollbar mb-4">
               {job.highlights.map((highlight: string, i: number) => (
                 <li key={i} className="flex items-start text-gray-700 dark:text-gray-300 text-sm">
                   <span className="mr-2 text-indigo-500 mt-1">•</span>
@@ -116,6 +119,19 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
                 </li>
               ))}
             </ul>
+
+            {/* Technologies Footer */}
+            {job.technologies && (
+              <div className="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-800">
+                <div className="flex flex-wrap gap-2">
+                  {job.technologies.map((tech: string) => (
+                    <span key={tech} className="px-2 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-xs rounded-md font-medium border border-indigo-100 dark:border-indigo-800/50">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         );
 
@@ -153,22 +169,24 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
 
       case 'SKILLS':
         return (
-          <div className="flex flex-col h-full p-6">
+          <div className="flex flex-col h-full p-6 overflow-y-auto custom-scrollbar">
             <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">Skills</h2>
             <div className="flex flex-wrap gap-2">
               {data.data.map((skill: any) => (
-                <div key={skill.name} className="flex flex-col items-center p-3 bg-gray-50 dark:bg-zinc-800 rounded-lg grow shadow-sm">
+                <div key={skill.name} className="flex flex-col items-center px-3 py-2 bg-white dark:bg-zinc-800 rounded-lg grow shadow-sm border border-gray-100 dark:border-zinc-700">
                   <span className="font-bold text-gray-800 dark:text-gray-200">{skill.name}</span>
-                  <span className="text-xs text-indigo-500">{skill.level}</span>
+                  <span className="text-xs text-indigo-500 font-medium">{skill.level}</span>
                 </div>
               ))}
             </div>
           </div>
         );
 
-      default:
-        return <div>Unknown Card Type</div>;
+      case 'MATCH':
+        return null; // Match card is handled by CardStack overlay logic if needed, or we can render a placeholder
     }
+
+
   };
 
   return (

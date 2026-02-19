@@ -41,7 +41,7 @@ export function transformResumeToCards(data: ResumeData): CardData[] {
     });
   });
 
-  // 5. Skills Card
+  // 5. Skills Card (Moved before Projects or after, user didn't specify order but logical flow)
   cards.push({
     id: 'skills',
     type: 'SKILLS',

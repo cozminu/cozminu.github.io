@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Cozmin Ungureanu",
-    "label": "Senior Software Developer | Node.js & TypeScript",
+    "label": "Senior Software Developer",
     "image": "profile.jpg",
     "email": "ucozmin@gmail.com",
     "phone": "",
@@ -38,7 +38,8 @@
       "highlights": [
         "Implemented new features to payment system.",
         "Designed and implemented JavaCard Applet for payment processing."
-      ]
+      ],
+      "technologies": ["JavaCard", "Node.js", "Payment Systems"]
     },
     {
       "name": "Cognizant",
@@ -53,7 +54,8 @@
         "Optimized large-data handling via concurrent calls, Azure Blob CSV uploads, and streaming (200K+ items).",
         "Orchestrated NestJS cron workloads on Kubernetes for ServiceNow, Sailpoint, and Workday syncs.",
         "Remediated WAST vulnerabilities to meet pharma-grade data security requirements."
-      ]
+      ],
+      "technologies": ["NestJS", "TypeScript", ".NET Core", "C#", "Azure", "Kubernetes", "ChatGPT"]
     },
     {
       "name": "Cognizant Softvision",
@@ -67,7 +69,8 @@
         "Partnered with frontend, QA, and product for seamless integration and UX.",
         "Integrated Redis and third‑party providers; identified scalability bottlenecks early.",
         "Upskilled rapidly in TypeScript, NestJS, and PostgreSQL."
-      ]
+      ],
+      "technologies": ["NestJS", "PostgreSQL", "Redis", "TypeScript"]
     },
     {
       "name": "SC Activemall SRL",
@@ -81,7 +84,8 @@
         "Built a background auth worker for concurrent logins, improving reliability and speed.",
         "Advised an 8‑person team on performance, caching, and security best practices.",
         "Developed internal tools (CRM on Joomla → Phalcon) and a customer web app (Bonfire)."
-      ]
+      ],
+      "technologies": ["PHP", "CodeIgniter", "MySQL", "Memcached", "Joomla", "Phalcon"]
     }
   ],
   "projects": [
@@ -125,47 +129,47 @@
   "skills": [
     {
       "name": "TypeScript",
-      "level": "Senior",
+      "level": "10+ years",
       "keywords": ["Frontend", "Backend"]
     },
     {
       "name": "NestJS",
-      "level": "Senior",
+      "level": "5+ years",
       "keywords": ["Backend", "Framework"]
     },
     {
       "name": "Node.js",
-      "level": "Senior",
+      "level": "10+ years",
       "keywords": ["Backend", "Runtime"]
     },
     {
       "name": "PostgreSQL",
-      "level": "Mid-Senior",
+      "level": "6+ years",
       "keywords": ["Database"]
     },
     {
       "name": "Redis",
-      "level": "Mid",
+      "level": "4 years",
       "keywords": ["Cache"]
     },
     {
       "name": "Azure",
-      "level": "Mid",
+      "level": "3 years",
       "keywords": ["Cloud"]
     },
     {
       "name": "Kubernetes",
-      "level": "Mid",
+      "level": "3 years",
       "keywords": ["DevOps"]
     },
     {
       "name": "PHP",
-      "level": "Senior",
+      "level": "10+ years",
       "keywords": ["Backend"]
     },
     {
       "name": ".NET Core",
-      "level": "Mid",
+      "level": "3 years",
       "keywords": ["Backend"]
     }
   ],
