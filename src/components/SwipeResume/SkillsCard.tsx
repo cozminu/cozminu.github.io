@@ -51,7 +51,7 @@ export default function SkillsCard({ data }: SkillsCardProps) {
       </div>
 
       {/* Skills Grid */}
-      <div className="relative z-10 flex-1 overflow-y-auto pr-2 space-y-5 custom-scrollbar">
+      <div className="relative z-10 flex-1 pr-2 space-y-5">
         {data.map((cat, idx) => (
           <motion.div
             key={cat.category}

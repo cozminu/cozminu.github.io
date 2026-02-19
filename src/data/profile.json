@@ -111,10 +111,7 @@
       "items": [
         "Node.js (NestJS)",
         "C#",
-        "PHP",
-        "REST",
-        "Streaming APIs",
-        "System Integrations"
+        "PHP"
       ]
     },
     {
@@ -130,18 +127,14 @@
       "items": [
         "PostgreSQL",
         "MySQL",
-        "Redis",
-        "Memcached"
+        "Redis"
       ]
     },
     {
       "category": "Tools",
       "items": [
         "Docker",
-        "Kubernetes",
-        "Git",
-        "Jira",
-        "Confluence"
+        "Git"
       ]
     }
   ],
