@@ -9,7 +9,7 @@
     --color-bg-light: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     /* Fallback */
     --color-bg-gradient-light: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-    --color-bg-gradient-dark: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    --color-bg-gradient-dark: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
 
     --color-glass-border-light: rgba(255, 255, 255, 0.4);
     --color-glass-border-dark: rgba(255, 255, 255, 0.1);
