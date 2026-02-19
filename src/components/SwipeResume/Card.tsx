@@ -145,23 +145,27 @@ export default function Card({ data, onSwipe, index, score, onRestart }: CardPro
                 <h2 className="text-2xl font-bold text-white">{project.name}</h2>
               </div>
             </div>
-            <div className="p-6 flex-1">
+            <div className="p-6 flex-1 flex flex-col relative">
+              <span className="text-xs font-bold tracking-wider text-indigo-500 uppercase mb-2 block">Project</span>
               <p className="text-gray-700 dark:text-gray-300 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.keywords.map((tech: string) => (
-                  <span key={tech} className="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 text-xs rounded font-medium">
-                    {tech}
-                  </span>
-                ))}
-              </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 flex-grow overflow-y-auto custom-scrollbar mb-4">
                 {project.highlights.map((h: string, i: number) => (
                   <div key={i} className="flex items-center text-xs text-gray-500 dark:text-gray-400">
                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
                     {h}
                   </div>
                 ))}
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-800">
+                <div className="flex flex-wrap gap-2">
+                  {project.keywords.map((tech: string) => (
+                    <span key={tech} className="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 text-xs rounded font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
