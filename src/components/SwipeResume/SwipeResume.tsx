@@ -14,20 +14,14 @@ const resumeData = profileData as unknown as ResumeData;
 export default function SwipeResume() {
   const cards = useMemo(() => transformResumeToCards(resumeData), []);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [score, setScore] = useState(0); // Keeping for potential future use
   const [history, setHistory] = useState<{ index: number; action: 'left' | 'right' }[]>([]);
   const cardStackRef = useRef<CardStackRef>(null);
   const [isSwiping, setIsSwiping] = useState(false);
+  const [isSuperLiked, setIsSuperLiked] = useState(false);
 
   const handleSwipe = useCallback((id: string, direction: 'left' | 'right') => {
     // Add to history for undo
     setHistory(prev => [...prev, { index: currentIndex, action: direction }]);
-
-    // Update score (simple logic: right swipe = interest)
-    if (direction === 'right') {
-      setScore(prev => prev + 10);
-    }
-
     // Advance to next card
     setCurrentIndex(prev => prev + 1);
   }, [currentIndex]);
@@ -46,17 +40,18 @@ export default function SwipeResume() {
     const lastAction = history[history.length - 1];
     setHistory(prev => prev.slice(0, -1));
     setCurrentIndex(lastAction.index);
-
-    if (lastAction.action === 'right') {
-      setScore(prev => prev - 10);
-    }
   }, [history, isSwiping]);
+
+  const handleSuperLike = useCallback(() => {
+    setIsSuperLiked(true);
+    setCurrentIndex(cards.length);
+  }, [cards.length]);
 
   // Restart handler
   const handleRestart = () => {
     setCurrentIndex(0);
-    setScore(0);
     setHistory([]);
+    setIsSuperLiked(false);
   };
 
   const isFinished = currentIndex >= cards.length;
@@ -104,7 +99,8 @@ export default function SwipeResume() {
               cards={cards}
               currentIndex={currentIndex}
               onSwipe={handleSwipe}
-              score={score}
+              positiveSwipes={isSuperLiked ? cards.length : history.filter(h => h.action === 'right').length}
+              totalSwipes={isSuperLiked ? cards.length : history.length}
               onRestart={handleRestart}
             />
           )}
@@ -114,6 +110,7 @@ export default function SwipeResume() {
           <Controls
             onVote={handleVote}
             onUndo={handleUndo}
+            onSuperLike={handleSuperLike}
             canUndo={history.length > 0}
             disabled={isFinished || isSwiping}
           />

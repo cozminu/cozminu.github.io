@@ -6,7 +6,7 @@
     "email": "ucozmin@gmail.com",
     "phone": "",
     "url": "https://cozminu.github.io",
-    "summary": "Senior Software Engineer specializing in scalable API platforms and system integrations handling 200K+ data loads and 1M+ daily requests. Expert in TypeScript, NestJS, and Distributed Systems.",
+    "summary": "Senior Software Engineer (10+ years) specializing in scalable API platforms and system integrations handling 200K+ data loads and 1M+ daily requests. Expert in TypeScript, NestJS, and Distributed Systems.",
     "location": {
       "address": "",
       "postalCode": "",
@@ -26,7 +26,7 @@
         "url": "https://github.com/cozminu"
       }
     ],
-    "experience": "",
+    "experience": "10+ Years Exp.",
     "langs": ["TypeScript", "C#", "PHP", "SQL", "React"]
   },
   "work": [
@@ -93,6 +93,19 @@
   ],
   "projects": [
     {
+      "name": "AI Assistant Integration",
+      "description": "Enterprise digital assistant with custom APIs, ChatGPT wrapper, and large-data streaming for pharma clients.",
+      "highlights": [
+        "Led first version of chat API using ChatGPT",
+        "200K+ items processed",
+        "Pharma-grade security",
+        "99.99% uptime"
+      ],
+      "keywords": ["NestJS", "TypeScript", "Azure", "Kubernetes", "ChatGPT"],
+      "url": "",
+      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80"
+    },
+    {
       "name": "Payment System Upgrade",
       "description": "JavaCard Applet and backend features for secure, scalable payment processing across multiple platforms.",
       "highlights": [
@@ -103,6 +116,18 @@
       "keywords": ["JavaCard", "Node.js", "TypeScript", "PostgreSQL"],
       "url": "",
       "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      "name": "REST API Platform",
+      "description": "High-performance REST API serving 1M+ requests/day, with caching, background workers, and internal tools.",
+      "highlights": [
+        "1M+ daily requests",
+        "8-person team mentored",
+        "Seamless integrations"
+      ],
+      "keywords": ["PHP", "CodeIgniter", "MySQL", "Memcached", "Joomla", "Phalcon"],
+      "url": "",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
     }
   ],
   "skills": [

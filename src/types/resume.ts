@@ -63,6 +63,7 @@ export interface Config {
 export interface ResumeData {
   basics: Basics;
   work: Work[];
+  past_work?: Work[];
   projects: Project[];
   skills: Skill[];
   config: Config;

@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
-import { X, Heart, RotateCcw } from 'lucide-react';
+import { X, Heart, RotateCcw, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface ControlsProps {
   onVote: (direction: 'left' | 'right') => void;
   onUndo: () => void;
+  onSuperLike: () => void;
   canUndo: boolean;
   disabled: boolean;
 }
 
-export default function Controls({ onVote, onUndo, canUndo, disabled }: ControlsProps) {
+export default function Controls({ onVote, onUndo, onSuperLike, canUndo, disabled }: ControlsProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (disabled) return;
@@ -63,6 +64,18 @@ export default function Controls({ onVote, onUndo, canUndo, disabled }: Controls
         aria-label="Like"
       >
         <Heart className="w-8 h-8 fill-current" />
+      </motion.button>
+
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={onSuperLike}
+        disabled={disabled}
+        className={`p-3 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/20 dark:border-white/10 transition-colors
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'text-blue-500 hover:text-blue-600 hover:bg-white/60 dark:hover:bg-white/20'}`}
+        aria-label="Super Like"
+      >
+        <Star className="w-6 h-6 fill-current" />
       </motion.button>
     </div>
   );

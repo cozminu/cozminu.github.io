@@ -8,7 +8,8 @@ interface CardStackProps {
   cards: CardData[];
   onSwipe: (id: string, direction: 'left' | 'right') => void;
   currentIndex: number;
-  score?: number;
+  positiveSwipes?: number;
+  totalSwipes?: number;
   onRestart?: () => void;
 }
 
@@ -16,7 +17,7 @@ export interface CardStackRef {
   swipe: (direction: 'left' | 'right') => Promise<void>;
 }
 
-const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, currentIndex, score, onRestart }, ref) => {
+const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, currentIndex, positiveSwipes, totalSwipes, onRestart }, ref) => {
   // We show up to 3 cards for stack effect
   const visibleCards = cards.slice(currentIndex, currentIndex + 3).reverse();
   const cardRefs = useRef<Record<string, CardRef | null>>({});
@@ -59,7 +60,6 @@ const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, cu
               data={card}
               onSwipe={(dir) => onSwipe(card.id, dir)}
               index={stackIndex}
-              score={score}
               onRestart={onRestart}
             />
           );
@@ -67,7 +67,7 @@ const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, cu
       </AnimatePresence>
 
       {currentIndex >= cards.length && (
-        <MatchResult score={score} onRestart={onRestart} />
+        <MatchResult positiveSwipes={positiveSwipes} totalSwipes={totalSwipes} onRestart={onRestart} />
       )}
     </div>
   );

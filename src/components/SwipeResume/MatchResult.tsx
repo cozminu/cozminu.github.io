@@ -4,11 +4,12 @@ import profileData from '../../data/profile.json';
 import { ResumeData } from '../../types/resume';
 
 interface MatchResultProps {
-  score?: number;
+  positiveSwipes?: number;
+  totalSwipes?: number;
   onRestart?: () => void;
 }
 
-export default function MatchResult({ score, onRestart }: MatchResultProps) {
+export default function MatchResult({ positiveSwipes = 0, totalSwipes = 0, onRestart }: MatchResultProps) {
   const data = profileData as unknown as ResumeData;
   const links = [
     {
@@ -33,7 +34,10 @@ export default function MatchResult({ score, onRestart }: MatchResultProps) {
     }
   ];
 
-  if (score !== undefined && score < 40) {
+  const matchPercentage = totalSwipes > 0 ? (positiveSwipes / totalSwipes) * 100 : 0;
+  const isMatch = matchPercentage >= 50;
+
+  if (!isMatch) {
     return (
       <div className="flex flex-col h-full w-full bg-gradient-to-br from-gray-700 to-gray-900 text-white rounded-3xl shadow-2xl overflow-hidden">
         <div className="h-1/3 flex flex-col items-center justify-center p-6 text-center">

@@ -134,7 +134,7 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
               </div>
             </div>
 
-            <ul className="space-y-3 flex-1 overflow-y-auto custom-scrollbar mb-4">
+            <ul className="space-y-3 flex-1 mb-4">
               {job.highlights.map((highlight: string, i: number) => (
                 <li key={i} className="flex items-start text-gray-700 dark:text-gray-300 text-sm">
                   <span className="mr-2 text-indigo-500 mt-1">•</span>
@@ -143,18 +143,27 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
               ))}
             </ul>
 
-            {/* Technologies Footer */}
-            {job.technologies && (
-              <div className="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-800">
-                <div className="flex flex-wrap gap-2">
+            {/* Footer: Technologies & History */}
+            <div className="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-800">
+              {job.technologies && (
+                <div className="flex flex-wrap gap-2 mb-3">
                   {job.technologies.map((tech: string) => (
                     <span key={tech} className="px-2 py-1 bg-white/40 dark:bg-white/10 text-indigo-700 dark:text-indigo-300 text-xs rounded-md font-medium border border-white/20 dark:border-white/10 shadow-sm">
                       {tech}
                     </span>
                   ))}
                 </div>
-              </div>
-            )}
+              )}
+
+              {/* Past Experience Hint */}
+              {job.pastExperience && job.pastExperience.count > 0 && (
+                <div className="flex items-center justify-start opacity-60 hover:opacity-100 transition-opacity">
+                  <p className="text-[10px] uppercase tracking-widest text-gray-400 dark:text-gray-500 font-semibold">
+                    + {job.pastExperience.count} previous roles since {job.pastExperience.oldestYear}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         );
 
@@ -172,7 +181,7 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
               <span className="text-xs font-bold tracking-wider text-indigo-500 uppercase mb-2 block">Project</span>
               <p className="text-gray-700 dark:text-gray-300 mb-4">{project.description}</p>
 
-              <div className="space-y-2 flex-grow overflow-y-auto custom-scrollbar mb-4">
+              <div className="space-y-2 flex-grow mb-4">
                 {project.highlights.map((h: string, i: number) => (
                   <div key={i} className="flex items-center text-xs text-gray-500 dark:text-gray-400">
                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
@@ -196,7 +205,7 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
 
       case 'SKILLS':
         return (
-          <div className="flex flex-col h-full p-6 overflow-y-auto custom-scrollbar">
+          <div className="flex flex-col h-full p-6">
             <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white border-b pb-2">Technical Depth</h2>
             <div className="space-y-6">
               {data.data.map((category: any) => (
