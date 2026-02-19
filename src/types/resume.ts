@@ -24,7 +24,7 @@ export interface Basics {
   profiles: Profile[];
   tagline: string;
   experience: string;
-  coreStack: string[];
+  langs: string[];
 }
 
 export interface Work {
