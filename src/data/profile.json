@@ -1,6 +1,6 @@
 {
   "basics": {
-    "name": "Cozmin",
+    "name": "Cozminu",
     "label": "Senior Software Engineer",
     "image": "profile.jpg",
     "email": "ucozmin@gmail.com",
@@ -27,7 +27,13 @@
       }
     ],
     "experience": "",
-    "langs": ["TypeScript", "C#", "PHP", "SQL", "React"]
+    "langs": [
+      "TypeScript",
+      "C#",
+      "PHP",
+      "SQL",
+      "React"
+    ]
   },
   "work": [
     {
@@ -41,7 +47,11 @@
         "Implemented new features to payment system.",
         "Designed and implemented JavaCard Applet for payment processing."
       ],
-      "technologies": ["JavaCard", "Node.js", "Payment Systems"]
+      "technologies": [
+        "JavaCard",
+        "Node.js",
+        "Payment Systems"
+      ]
     }
   ],
   "past_work": [
@@ -58,7 +68,15 @@
         "Designed custom .NET Core API to expose legacy system",
         "Remediated pharma-grade security vulnerabilities (WAST compliance)"
       ],
-      "technologies": ["NestJS", "TypeScript", ".NET Core", "C#", "Azure", "Kubernetes", "ChatGPT"]
+      "technologies": [
+        "NestJS",
+        "TypeScript",
+        ".NET Core",
+        "C#",
+        "Azure",
+        "Kubernetes",
+        "ChatGPT"
+      ]
     },
     {
       "name": "Cognizant Softvision",
@@ -73,7 +91,12 @@
         "Integrated Redis and third‑party providers; identified scalability bottlenecks early.",
         "Upskilled rapidly in TypeScript, NestJS, and PostgreSQL."
       ],
-      "technologies": ["NestJS", "PostgreSQL", "Redis", "TypeScript"]
+      "technologies": [
+        "NestJS",
+        "PostgreSQL",
+        "Redis",
+        "TypeScript"
+      ]
     },
     {
       "name": "SC Activemall SRL",
@@ -88,7 +111,14 @@
         "Guided API performance, caching strategy, and security decisions",
         "Developed internal tools (CRM on Joomla → Phalcon) and a customer web app (Bonfire)."
       ],
-      "technologies": ["PHP", "CodeIgniter", "MySQL", "Memcached", "Joomla", "Phalcon"]
+      "technologies": [
+        "PHP",
+        "CodeIgniter",
+        "MySQL",
+        "Memcached",
+        "Joomla",
+        "Phalcon"
+      ]
     }
   ],
   "projects": [
@@ -100,7 +130,12 @@
         "Improved reliability",
         "Reduced fraud risk"
       ],
-      "keywords": ["JavaCard", "Node.js", "TypeScript", "PostgreSQL"],
+      "keywords": [
+        "JavaCard",
+        "Node.js",
+        "TypeScript",
+        "PostgreSQL"
+      ],
       "url": "",
       "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80"
     }
