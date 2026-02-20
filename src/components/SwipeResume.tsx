@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useRef } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import CardStack, { CardStackRef } from './CardStack';
 import Controls from './Controls';
 import ProgressBar from './ProgressBar';
@@ -6,7 +6,6 @@ import profileData from '../data/profile.json';
 import { transformResumeToCards } from '../utils/resumeToCards';
 import { ResumeData } from '../types/resume';
 import ThemeToggle from './ThemeToggle'; // Adjust path if needed
-import { motion } from 'framer-motion';
 
 // Cast JSON to ResumeData to ensure types
 const resumeData = profileData as unknown as ResumeData;
@@ -19,7 +18,7 @@ export default function SwipeResume() {
   const [isSwiping, setIsSwiping] = useState(false);
   const [isSuperLiked, setIsSuperLiked] = useState(false);
 
-  const handleSwipe = useCallback((id: string, direction: 'left' | 'right') => {
+  const handleSwipe = useCallback((direction: 'left' | 'right') => {
     // Add to history for undo
     setHistory(prev => [...prev, { index: currentIndex, action: direction }]);
     // Advance to next card
@@ -75,36 +74,16 @@ export default function SwipeResume() {
         {!isFinished && <ProgressBar current={Math.min(currentIndex + 1, cards.length)} total={cards.length} />}
 
         <div className="my-8 w-full">
-          {false ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-3xl p-8 text-center shadow-xl border border-white/50 dark:border-white/10"
-            >
-              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">You've reached the end!</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">But let's be honest, I'm worth a second look. 😉</p>
-              <div className="flex gap-4 justify-center">
-                <button
-                  onClick={handleRestart}
-                  className="px-6 py-2 bg-indigo-600 text-white rounded-full font-bold hover:bg-indigo-700 transition"
-                >
-                  Start Over
-                </button>
-                {/* Add download PDF button if needed here too */}
-              </div>
-            </motion.div>
-          ) : (
-            <CardStack
-              ref={cardStackRef}
-              cards={cards}
-              currentIndex={currentIndex}
-              onSwipe={handleSwipe}
-              positiveSwipes={isSuperLiked ? cards.length : history.filter(h => h.action === 'right').length}
-              totalSwipes={isSuperLiked ? cards.length : history.length}
-              onRestart={handleRestart}
-              profileData={resumeData}
-            />
-          )}
+          <CardStack
+            ref={cardStackRef}
+            cards={cards}
+            currentIndex={currentIndex}
+            onSwipe={handleSwipe}
+            positiveSwipes={isSuperLiked ? cards.length : history.filter(h => h.action === 'right').length}
+            totalSwipes={isSuperLiked ? cards.length : history.length}
+            onRestart={handleRestart}
+            profileData={resumeData}
+          />
         </div>
 
         {!isFinished && (

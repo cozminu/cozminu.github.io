@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckCircle, Code2, Rocket, Share2, Terminal, Zap } from 'lucide-react';
 import { ResumeData } from '../types/resume';
 

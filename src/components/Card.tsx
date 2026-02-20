@@ -1,30 +1,26 @@
-import React, { useContext, useImperativeHandle, forwardRef } from 'react';
+import { useImperativeHandle, forwardRef } from 'react';
 import { motion, useMotionValue, useTransform, useAnimation, PanInfo } from 'framer-motion';
 import { CardData } from '../types/resume';
-import { ThemeContext } from '../context/ThemeContext';
 import AboutCard from './AboutCard';
 import SkillsCard from './SkillsCard';
 import ExpCard from './ExpCard';
 import ProjectsCard from './ProjectsCard';
+import IntroCard from './IntroCard';
 
 interface CardProps {
   data: CardData;
   onSwipe: (direction: 'left' | 'right') => void;
   index: number; // 0 = front, 1 = second, etc.
-  score?: number;
-  onRestart?: () => void;
 }
 
 export interface CardRef {
   triggerSwipe: (direction: 'left' | 'right') => Promise<void>;
 }
 
-const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRestart }, ref) => {
+const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index }, ref) => {
   const x = useMotionValue(0);
   const controls = useAnimation();
   const isFront = index === 0;
-  const { theme } = useContext(ThemeContext);
-  const isDark = theme === 'dark';
 
   useImperativeHandle(ref, () => ({
     triggerSwipe: async (direction: 'left' | 'right') => {
@@ -49,6 +45,7 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
   const nopeOpacity = useTransform(x, [-150, 0], [1, 0]);
 
   const handleDragEnd = async (event: any, info: PanInfo) => {
+    event;
     const threshold = 100;
     if (info.offset.x > threshold) {
       await controls.start({ x: 500, opacity: 0, transition: { duration: 0.4 } });
@@ -64,53 +61,10 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
   const renderContent = () => {
     switch (data.type) {
       case 'INTRO':
-        return (
-          <div className="flex flex-col h-full bg-black relative overflow-hidden rounded-3xl" draggable={false}>
-            {/* Full Background Image */}
-            <div className="absolute inset-0 w-full h-full">
-              <img
-                src={isDark ? 'profile_dark.jpg' : 'profile.jpg'}
-                alt={data.data.name}
-                className="w-full h-full object-cover"
-                draggable={false}
-              />
-              {/* Gradient Overlay for Text Readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
-            </div>
-
-            {/* Content Overlay */}
-            <div className="relative z-10 flex flex-col h-full p-8 text-white text-left">
-              <div className="mt-auto mb-8">
-                {/* Name & Title */}
-                <h1 className="text-4xl font-extrabold mb-2 tracking-tight">{data.data.name}</h1>
-                <div className="flex flex-col gap-1 mb-4">
-                  <p className="text-xl text-indigo-300 font-semibold">{data.data.label}</p>
-                  <p className="text-gray-400 font-medium text-sm">{data.data.experience}</p>
-                </div>
-
-                {/* Languages */}
-                <div>
-                  <div className="flex flex-wrap gap-2">
-                    {data.data.langs.map((lang: string) => (
-                      <span key={lang} className="px-3 py-1.5 bg-white/10 text-white text-xs rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-colors">
-                        {lang}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute bottom-4 left-0 right-0 flex justify-center opacity-70">
-                <p className="text-gray-400 italic text-xs animate-pulse">
-                  &larr; Swipe to explore &rarr;
-                </p>
-              </div>
-            </div>
-          </div>
-        );
+        return <IntroCard data={data.data} />;
 
       case 'ABOUT':
-        return <AboutCard data={data.data} />;
+        return <AboutCard />;
 
       case 'EXPERIENCE':
         return <ExpCard data={data.data} />;
@@ -120,9 +74,6 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index, score, onRe
 
       case 'SKILLS':
         return <SkillsCard data={data.data} />;
-
-      case 'MATCH':
-        return null; // Match card is handled by CardStack overlay logic if needed, or we can render a placeholder
     }
 
 

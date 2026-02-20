@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExternalLink, Code2, ArrowUpRight } from 'lucide-react';
 
 interface ProjectsCardProps {

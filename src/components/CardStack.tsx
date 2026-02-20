@@ -1,4 +1,4 @@
-import React, { useRef, useImperativeHandle, forwardRef } from 'react';
+import { useRef, useImperativeHandle, forwardRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Card, { CardRef } from './Card';
 import { CardData, ResumeData } from '../types/resume';
@@ -6,7 +6,7 @@ import MatchResult from './MatchResult';
 
 interface CardStackProps {
   cards: CardData[];
-  onSwipe: (id: string, direction: 'left' | 'right') => void;
+  onSwipe: (direction: 'left' | 'right') => void;
   currentIndex: number;
   positiveSwipes?: number;
   totalSwipes?: number;
@@ -59,9 +59,8 @@ const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, cu
                 }
               }}
               data={card}
-              onSwipe={(dir) => onSwipe(card.id, dir)}
+              onSwipe={(dir) => onSwipe(dir)}
               index={stackIndex}
-              onRestart={onRestart}
             />
           );
         })}

@@ -1,6 +1,5 @@
-import React from "react";
 import "./App.css";
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeProvider } from "./context/ThemeProvider";
 import SwipeResume from "./components/SwipeResume";
 
 function App() {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Bug, Code2, RefreshCcw, Terminal } from 'lucide-react';
 
 interface MatchResultFailProps {

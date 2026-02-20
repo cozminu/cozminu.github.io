@@ -1,4 +1,3 @@
-import React from 'react';
 import MatchResultSuccess from './MatchResultSuccess';
 import MatchResultFail from './MatchResultFail';
 

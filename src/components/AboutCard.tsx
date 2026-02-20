@@ -1,14 +1,6 @@
-import React from 'react';
 import { Cpu, Layers, Globe } from 'lucide-react';
 
-interface AboutCardProps {
-  data: {
-    summary: string;
-    [key: string]: any;
-  };
-}
-
-export default function AboutCard({ data }: AboutCardProps) {
+export default function AboutCard() {
   return (
     <div className="flex flex-col h-full bg-white dark:bg-slate-950 text-slate-800 dark:text-white rounded-3xl overflow-hidden relative p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
       {/* Subtle background tech texture */}
