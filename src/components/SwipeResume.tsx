@@ -1,11 +1,10 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
-import CardStack, { CardStackRef } from './CardStack';
+import CardStack, { CardStackRef } from './cards/CardStack';
 import Controls from './Controls';
 import ProgressBar from './ProgressBar';
 import profileData from '../data/profile.json';
 import { transformResumeToCards } from '../utils/resumeToCards';
 import { ResumeData } from '../types/resume';
-import ThemeToggle from './ThemeToggle'; // Adjust path if needed
 
 // Cast JSON to ResumeData to ensure types
 const resumeData = profileData as unknown as ResumeData;
@@ -41,10 +40,16 @@ export default function SwipeResume() {
     setCurrentIndex(lastAction.index);
   }, [history, isSwiping]);
 
-  const handleSuperLike = useCallback(() => {
+  const handleSuperLike = useCallback(async () => {
+    if (isSwiping || !cardStackRef.current) return;
+
+    setIsSwiping(true);
+    await cardStackRef.current.superLike();
+
     setIsSuperLiked(true);
     setCurrentIndex(cards.length);
-  }, [cards.length]);
+    setIsSwiping(false);
+  }, [cards.length, isSwiping]);
 
   // Restart handler
   const handleRestart = () => {
@@ -58,16 +63,19 @@ export default function SwipeResume() {
   return (
     <div className="min-h-screen min-h-[100dvh] flex flex-col items-center justify-center p-4 overflow-hidden relative transition-colors duration-300">
 
-      {/* Background decoration */}
-      <div className="absolute inset-0 z-0 opacity-20 dark:opacity-10 pointer-events-none">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-[500px] h-[500px] bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
-      </div>
-
-      {/* Top Bar */}
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeToggle />
+      {/* Cyberpunk Grid Background */}
+      <div
+        className="absolute inset-0 z-0 opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(0, 255, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.3) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          backgroundPosition: 'center center'
+        }}
+      />
+      {/* Glowing Orbs */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden mix-blend-screen">
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-cyan-900/40 rounded-full filter blur-[120px] animate-pulse" style={{ animationDuration: '2s' }}></div>
+        <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-purple-900/40 rounded-full filter blur-[120px] animate-pulse" style={{ animationDelay: '1s', animationDuration: '3s' }}></div>
       </div>
 
       <div className="w-full max-w-sm flex flex-col items-center z-10 relative">

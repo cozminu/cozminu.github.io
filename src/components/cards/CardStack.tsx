@@ -1,8 +1,8 @@
 import { useRef, useImperativeHandle, forwardRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Card, { CardRef } from './Card';
-import { CardData, ResumeData } from '../types/resume';
-import MatchResult from './MatchResult';
+import { CardData, ResumeData } from '../../types/resume';
+import MatchResult from '../MatchResult';
 
 interface CardStackProps {
   cards: CardData[];
@@ -16,6 +16,7 @@ interface CardStackProps {
 
 export interface CardStackRef {
   swipe: (direction: 'left' | 'right') => Promise<void>;
+  superLike: () => Promise<void>;
 }
 
 const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, currentIndex, positiveSwipes, totalSwipes, onRestart, profileData }, ref) => {
@@ -31,6 +32,25 @@ const CardStack = forwardRef<CardStackRef, CardStackProps>(({ cards, onSwipe, cu
       if (activeCardRef) {
         await activeCardRef.triggerSwipe(direction);
       }
+    },
+    superLike: async () => {
+      // Swipe all visible cards to the right with a stagger
+      // Get the correct slice of cards to animate
+      const cardsToAnimate = cards.slice(currentIndex, currentIndex + 3);
+
+      const swipePromises = cardsToAnimate.map((card, idx) => {
+        const activeCardRef = cardRefs.current[card.id];
+        if (!activeCardRef) return Promise.resolve();
+
+        return new Promise<void>(resolve => {
+          setTimeout(async () => {
+            await activeCardRef.triggerSuperLike();
+            resolve();
+          }, idx * 100); // 100ms delay between cards
+        });
+      });
+
+      await Promise.all(swipePromises);
     }
   }), [cards, currentIndex]);
 

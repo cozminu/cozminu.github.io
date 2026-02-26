@@ -1,4 +1,4 @@
-import { Code2, Cpu, Share2, Terminal, Zap, ShieldCheck } from 'lucide-react';
+import { Download, Cpu, Share2, Terminal, Zap, ShieldCheck } from 'lucide-react';
 import { ResumeData } from '../types/resume';
 
 interface MatchResultSuccessProps {
@@ -22,10 +22,10 @@ export default function MatchResultSuccess({ onRestart, profileData }: MatchResu
       icon: <Share2 className="w-5 h-5" />,
     },
     {
-      name: 'SOURCE_CODE',
-      url: data.basics.profiles.find(p => p.network === 'GitHub')?.url || '#',
+      name: 'EXTRACT_DATA',
+      url: './CV_Cozmin_Ungureanu.pdf',
       color: 'hover:bg-purple-500/20 hover:border-purple-400 hover:text-purple-300 border-purple-500/30 text-purple-500',
-      icon: <Code2 className="w-5 h-5" />,
+      icon: <Download className="w-5 h-5" />,
     }
   ];
 
@@ -49,7 +49,7 @@ export default function MatchResultSuccess({ onRestart, profileData }: MatchResu
         <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-600 rounded-full blur-[100px]" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-between h-full p-8 text-center overflow-y-auto overflow-x-hidden !scrollbar-hide">
+      <div className="relative z-10 flex flex-col items-center justify-between h-full p-8 text-center overflow-x-hidden !scrollbar-hide">
 
         <div className="flex-1 flex flex-col items-center justify-center w-full space-y-5">
           {/* Success Icon */}
@@ -59,7 +59,7 @@ export default function MatchResultSuccess({ onRestart, profileData }: MatchResu
           </div>
 
           <div className="space-y-3 w-full">
-            <h1 className="text-3xl lg:text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 uppercase" style={{ textShadow: '0 0 15px rgba(0,255,255,0.3)' }}>
+            <h1 className="text-2xl lg:text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 uppercase" style={{ textShadow: '0 0 15px rgba(0,255,255,0.3)' }}>
               UPLINK_ESTABLISHED
             </h1>
             <div className="border-l-2 border-cyan-500/50 pl-4 text-left backdrop-blur-sm bg-cyan-950/20 py-2">
@@ -78,7 +78,7 @@ export default function MatchResultSuccess({ onRestart, profileData }: MatchResu
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
             <div className="flex items-center gap-2 mb-3 pb-2 border-b border-cyan-500/30">
               <Terminal className="w-3 h-3 text-cyan-400" />
-              <span className="text-cyan-500 tracking-widest uppercase text-xs">root@mainframe:~/deploy max-w-full</span>
+              <span className="text-cyan-500 tracking-widest uppercase text-xs">root@mainframe ~ % ./deploy.sh</span>
             </div>
             <div className="space-y-2 opacity-90 text-[10px] tracking-widest uppercase w-full">
               <div className="flex gap-2">
@@ -141,7 +141,7 @@ export default function MatchResultSuccess({ onRestart, profileData }: MatchResu
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-cyan-500/20 group-hover:bg-cyan-500/50 transition-colors"></div>
 
             <Cpu className="w-3 h-3 group-hover:rotate-90 transition-transform duration-500" />
-            <span>TERMINATE_SESSION</span>
+            <span>REBOOT_SESSION</span>
           </button>
         </div>
       </div>

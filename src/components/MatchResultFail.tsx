@@ -58,7 +58,7 @@ export default function MatchResultFail({ onRestart }: MatchResultFailProps) {
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-50"></div>
           <div className="flex items-center gap-3 text-left mb-3">
             <Terminal className="w-4 h-4 text-red-500 animate-pulse" />
-            <span className="text-[10px] text-red-400 uppercase tracking-widest">root@override:~/diagnostics</span>
+            <span className="text-[10px] text-red-400 uppercase tracking-widest">root@mainframe ~ % tail ./uplink.log</span>
           </div>
           <ul className="text-[10px] text-left space-y-2 text-red-300 uppercase tracking-widest w-full">
             <li className="flex items-center gap-2">

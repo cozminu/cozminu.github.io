@@ -29,53 +29,84 @@ export default function Controls({ onVote, onUndo, onSuperLike, canUndo, disable
   }, [onVote, onUndo, canUndo, disabled]);
 
   return (
-    <div className="flex items-center gap-6 mt-8">
+    <div className="flex items-center gap-6 mt-8 relative z-10 w-full justify-center">
+      {/* Decorative scanline behind controls */}
+      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent -translate-y-1/2 -z-10 pointer-events-none" />
+
+      {/* Undo Button */}
       <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={onUndo}
         disabled={!canUndo || disabled}
-        className={`p-4 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/20 dark:border-white/10 transition-colors
-          ${!canUndo || disabled ? 'opacity-50 cursor-not-allowed text-gray-400' : 'text-yellow-500 hover:text-yellow-600 hover:bg-white/60 dark:hover:bg-white/20'}`}
+        className={`relative group p-4 rounded-none border transition-all duration-300 overflow-hidden
+          ${!canUndo || disabled
+            ? 'border-gray-800 bg-gray-900/50 text-gray-700 cursor-not-allowed opacity-50'
+            : 'border-yellow-500/50 bg-black/60 text-yellow-500 hover:border-yellow-400 hover:text-yellow-400 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] shadow-[inset_0_0_10px_rgba(234,179,8,0.1)]'
+          }`}
         aria-label="Undo"
       >
-        <RotateCcw className="w-6 h-6" />
+        {!canUndo && disabled ? null : (
+          <div className="absolute inset-0 bg-yellow-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+        )}
+        <RotateCcw className="w-5 h-5 relative z-10" />
       </motion.button>
 
+      {/* Pass (X) Button */}
       <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => onVote('left')}
         disabled={disabled}
-        className={`p-5 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md shadow-xl border border-white/20 dark:border-white/10 transition-colors
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'text-red-500 hover:text-red-600 hover:bg-white/60 dark:hover:bg-white/20'}`}
+        className={`relative group p-5 rounded-none border transition-all duration-300 overflow-hidden
+          ${disabled
+            ? 'border-gray-800 bg-gray-900/50 text-gray-700 cursor-not-allowed opacity-50'
+            : 'border-red-500/50 bg-black/80 text-red-500 hover:border-red-400 hover:text-red-400 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] shadow-[inset_0_0_15px_rgba(239,68,68,0.15)]'
+          }`}
         aria-label="Pass"
       >
-        <X className="w-8 h-8" />
+        {!disabled && (
+          <div className="absolute inset-0 bg-red-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+        )}
+        <X className="w-7 h-7 relative z-10" />
       </motion.button>
 
+      {/* Like (Heart) Button */}
       <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => onVote('right')}
         disabled={disabled}
-        className={`p-5 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md shadow-xl border border-white/20 dark:border-white/10 transition-colors
-           ${disabled ? 'opacity-50 cursor-not-allowed' : 'text-green-500 hover:text-green-600 hover:bg-white/60 dark:hover:bg-white/20'}`}
+        className={`relative group p-5 rounded-none border transition-all duration-300 overflow-hidden
+           ${disabled
+            ? 'border-gray-800 bg-gray-900/50 text-gray-700 cursor-not-allowed opacity-50'
+            : 'border-cyan-500/50 bg-black/80 text-cyan-500 hover:border-cyan-400 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] shadow-[inset_0_0_15px_rgba(6,182,212,0.15)]'
+          }`}
         aria-label="Like"
       >
-        <Heart className="w-8 h-8 fill-current" />
+        {!disabled && (
+          <div className="absolute inset-0 bg-cyan-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+        )}
+        <Heart className="w-7 h-7 fill-transparent group-hover:fill-cyan-500/20 transition-colors relative z-10" />
       </motion.button>
 
+      {/* Super Like Button */}
       <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={onSuperLike}
         disabled={disabled}
-        className={`p-3 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-md shadow-lg border border-white/20 dark:border-white/10 transition-colors
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'text-blue-500 hover:text-blue-600 hover:bg-white/60 dark:hover:bg-white/20'}`}
+        className={`relative group p-4 rounded-none border transition-all duration-300 overflow-hidden
+          ${disabled
+            ? 'border-gray-800 bg-gray-900/50 text-gray-700 cursor-not-allowed opacity-50'
+            : 'border-blue-500/50 bg-black/60 text-blue-500 hover:border-blue-400 hover:text-blue-400 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] shadow-[inset_0_0_10px_rgba(59,130,246,0.1)]'
+          }`}
         aria-label="Super Like"
       >
-        <Star className="w-6 h-6 fill-current" />
+        {!disabled && (
+          <div className="absolute inset-0 bg-blue-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0" />
+        )}
+        <Star className="w-5 h-5 fill-transparent group-hover:fill-blue-500/20 transition-colors relative z-10" />
       </motion.button>
     </div>
   );

@@ -81,6 +81,6 @@ export interface CardData {
   id: string;
   type: CardType;
   title: string;
-  data: any; // Flexible data depending on type
+  data: unknown; // Flexible data depending on type
   color?: string;
 }
