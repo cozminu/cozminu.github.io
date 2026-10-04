@@ -81,13 +81,13 @@ const Card = forwardRef<CardRef, CardProps>(({ data, onSwipe, index }, ref) => {
   const handleDragEnd = async (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const threshold = 100;
     if (info.offset.x > threshold) {
-      await controls.start({ x: 500, opacity: 0, transition: { duration: 0.4 } });
+      await controls.start({ x: 300, opacity: 0, transition: { duration: 0.3 } });
       onSwipe('right');
     } else if (info.offset.x < -threshold) {
-      await controls.start({ x: -500, opacity: 0, transition: { duration: 0.4 } });
+      await controls.start({ x: -300, opacity: 0, transition: { duration: 0.3 } });
       onSwipe('left');
     } else {
-      controls.start({ x: 0, rotate: 0, transition: { type: 'spring', stiffness: 500, damping: 50 } });
+      controls.start({ x: 0, rotate: 0, transition: { type: 'spring', stiffness: 300, damping: 50 } });
     }
   };
 
